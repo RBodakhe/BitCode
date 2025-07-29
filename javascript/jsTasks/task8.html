@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #f1f3f5;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .task-container {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 60px;
+      }
+
+      .btn-add {
+        width: 100%;
+        font-weight: bold;
+      }
+
+      .form-label {
+        font-weight: 600;
+      }
+
+      .text-danger.small {
+        font-size: 0.8rem;
+        margin-top: 4px;
+      }
+
+      .table {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .table thead {
+        background-color: #20c997;
+        color: white;
+      }
+
+      .table th,
+      .table td {
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      .status-checkbox {
+        font-size: 0.85rem;
+        text-align: left;
+        line-height: 1.2;
+      }
+
+      .status-checkbox input {
+        margin-right: 6px;
+      }
+
+      @media (max-width: 768px) {
+        .task-container {
+          margin-bottom: 30px;
+        }
+
+        .status-checkbox {
+          text-align: center;
+        }
+      }
+      .error {
+        animation: ani1 1s linear infinite;
+        height: 30px;
+      }
+      @keyframes ani1 {
+        0% {
+          opacity: 0;
+          font-size: small;
+        }
+        20% {
+          opacity: 0.9;
+          font-size: medium;
+        }
+        80% {
+          opacity: 0.9;
+          font-size: medium;
+        }
+        100% {
+          opacity: 0;
+          font-size: small;
+        }
+      }
+      .bg-red{
+        background-color: red;
+      }
+      .bg-green{
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <!-- Left Task Form -->
+        <div class="col-md-5 col-sm-12">
+          <div class="task-container">
+            <h3 class="text-center mb-4 text-success">
+              <i class="fa-solid fa-list-check me-2"></i>Task Manager
+            </h3>
+            <div class="mb-3">
+              <label for="txtTask" class="form-label">Enter Task</label>
+              <input
+                type="text"
+                class="form-control"
+                id="txtTask"
+                placeholder="e.g. Complete homework"
+              />
+              <div
+                id="error"
+                class="text-danger small error"
+                style="visibility: hidden"
+              >
+                * Task is required
+              </div>
+            </div>
+            <button class="btn btn-success btn-add mb-2" onclick="addTask();">
+              <i class="fa-solid fa-plus me-1"></i>Add Task
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Task Table -->
+        <div class="col-md-7 col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Task</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>
+                    Status
+                    <div class="status-checkbox mt-2">
+                      <label><input type="checkbox" disabled /> Pending</label
+                      ><br />
+                      <label
+                        ><input type="checkbox" checked disabled />
+                        Completed</label
+                      >
+                    </div>
+                  </th>
+                  <th>Remark</th>
+                </tr>
+              </thead>
+              <tbody id="tasks">
+                <tr>
+                  <td colspan="6" class="text-center text-danger fw-bold py-4">
+                    <i class="fa-solid fa-circle-info me-2"></i>No task yet
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- javascript -->
+    <script>
+      let tasks = [];
+      let txtTask = document.getElementById("txtTask");
+      let error = document.getElementById("error");
+      let tbody = document.getElementById("tasks");
+
+      txtTask.addEventListener(
+        "focus",
+        () => (error.style.visibility = "hidden")
+      );
+      let counter = 0;
+      function addTask() {
+        let taskName = txtTask.value;
+        if (taskName === "") {
+          error.style.visibility = "visible";
+          return;
+        }
+        counter++;
+        tasks.push(new Task(counter, taskName));
+
+        displayTasks();
+        txtTask.value = "";
+        console.log(tasks);
+      }
+
+      function displayTasks() {
+        let tableRows = "";
+        if (tasks.length == 0) {
+          tableRows += `<tr>
+                  <td colspan="6" class="text-center text-danger fw-bold py-4">
+                    <i class="fa-solid fa-circle-info me-2"></i>No task yet
+                  </td>
+                </tr>`;
+        } else {
+          for (let i = 0; i < tasks.length; i++) {
+            const { date, time } = formatTaskDateTime(tasks[i]);
+            tableRows += `<tr class="${
+              tasks[i].status ? "bg-green" : "bg-red"
+            }">
+                        <th>${tasks[i].index}</th>
+                        <td>${tasks[i].name}</td>
+                        <td>${date}</td>
+                        <td>${time}</td>
+                        <td>
+                            <input 
+                            type = "checkbox" 
+                            value=${tasks[i].index} 
+                            ${tasks[i].status ? "checked" : ""} 
+                            onclick=changeStatus(event)
+                            />
+                            </td>
+                            <td contentEditable="true" 
+                                data-index="${tasks[i].index}" 
+                                onblur="addRemark(event)">
+                                ${
+                                  tasks[i].remark == null
+                                    ? "no remark"
+                                    : tasks[i].remark
+                                }
+                                </td>
+                      </tr>`;
+          }
+        }
+        tbody.innerHTML = tableRows;
+      }
+
+      function addRemark(event) {
+        const index = event.currentTarget.dataset.index;
+        const value = event.currentTarget.innerText.trim();
+        for (let i = 0; i < tasks.length; i++) {
+          if (index == tasks[i].index) {
+            tasks[i].remark = value === "" ? null : value;
+          }
+        }
+        displayTasks();
+        // console.log(`Remark for index ${index}: ${value}`);
+      }
+      function changeStatus(event) {
+        // console.log(event.currentTarget.value);
+        let index = event.currentTarget.value;
+        for (let i = 0; i < tasks.length; i++) {
+          if (index == tasks[i].index) {
+            tasks[i].status = event.currentTarget.checked;
+          }
+        }
+        displayTasks();
+      }
+      function formatTaskDateTime(task) {
+        const dateObj = task.date;
+
+        const weekday = dateObj.toLocaleString("en-IN", { weekday: "long" });
+        const day = dateObj.getDate();
+        const suffix = (d) => {
+          if (d > 3 && d < 21) return "th";
+          switch (d % 10) {
+            case 1:
+              return "st";
+            case 2:
+              return "nd";
+            case 3:
+              return "rd";
+            default:
+              return "th";
+          }
+        };
+
+        const dayWithSuffix = `${day}${suffix(day)}`;
+        const month = dateObj.toLocaleString("en-IN", { month: "long" });
+        const year = dateObj.getFullYear();
+        const time = dateObj.toLocaleTimeString("en-IN"); // includes AM/PM
+
+        const fullDate = `${weekday}, ${dayWithSuffix} ${month} ${year}`;
+        return { date: fullDate, time };
+      }
+
+      function Task(index, taskName) {
+        this.index = index;
+        this.name = taskName;
+        this.date = new Date();
+        this.status = false;
+        this.remark = null;
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

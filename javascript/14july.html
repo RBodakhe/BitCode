@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <button onclick="openWindow()">Open window</button>
+    <button onclick="closeWindow()">Close window</button>
+    <input type="text" name="" id="txtName" onfocus="removeFocus()" oninput="removeFocus()" />
+    <button onclick="setFocus()">focus</button>
+    <script>
+      let txtName = document.getElementById("txtName");
+      function setFocus() {
+        txtName.focus();
+      }
+      function removeFocus() {
+        if (txtName.value.length >= 8) {
+          txtName.blur();
+        }
+      }
+      let myWin = null;
+      function openWindow() {
+        myWin = open("", "", "width=500,height=500");
+        myWin.document.write("Hello this is new window");
+        myWin.document.bgColor = "gray";
+      }
+      function closeWindow() {
+        myWin.close();
+      }
+    </script> -->
+    <!-- <script>
+      let ojb = {
+        name: "test",
+        fun: function () {
+          console.log("{start", this.name);
+          setTimeout(function()  {
+            console.log("execute after 1000 ms normal fun", typeof this.name);
+          }, 1000);
+        //   setTimeout(() => {
+        //     console.log("execute after 1000 ms arrow fun", this.name);
+        //   }, 1000);
+          console.log("end}", this.name);
+        },
+      };
+      ojb.fun();
+    </script> -->
+
+    <script>
+      // window.screen obj
+      document.write("<br>availHeight" + screen.availHeight);
+      document.write("<br>height" + screen.height);
+      document.write("<br>availWidth" + screen.availWidth);
+      document.write("<br>width" + screen.width);
+      document.write("<br>colorDepth" + screen.colorDepth);
+    </script>
+    <script>
+      // window.history obj
+      //   history.length
+      //   history.back();
+      //   history.forward();
+      //   history.go(-2);
+      //   history.go(2);
+    </script>
+
+    <script>
+      // window.location obj
+      document.writeln("<br>location.host" + location.host);
+      document.writeln("<br>location.hostName" + location.hostName);
+      document.writeln("<br>location.port" + location.port);
+      document.writeln("<br>location.protocol" + location.protocol);
+      document.writeln("<br>location.search" + location.search);
+      document.writeln("<br>location.pathName" + location.pathname);
+      document.writeln("<br>location.href" + location.href);
+      url = "game";
+      //   location.assign(url);
+      //   location.replace("www.google.com");
+      //   location.reload();
+    </script>
+
+    <script>
+      // window.navigator obj
+      document.writeln(
+        "<br> navigator.cookieEnabled " + navigator.cookieEnabled
+      );
+      document.writeln("<br> navigator.language " + navigator.language);
+      document.writeln("<br> navigator.userAgent " + navigator.userAgent);
+      let arr = navigator.plugins;
+      arr.forEach((element) => {
+        document.writeln("<br> navigator.plugins " + element.name);
+      });
+      document.writeln("<br> navigator.userAgent " + navigator.userAgent);
+    </script>
+    <script>
+      // arguments Object
+      function add() {
+        let sum = 0;
+        console.log(arguments);
+        for (let i = 0; i < arguments.length; i++) {
+          if (!isNaN(arguments[i])) {
+            sum += arguments[i];
+          }
+        }
+        console.log(sum);
+        if (arguments[arguments.length - 1] == "d") {
+          console.log(sum * 2);
+        }
+      }
+      add(6, 6, 6, "d");
+      add(6, 6, 6, 7, 7, 7, 7);
+    </script>
+
+    <script>
+      var x = 11;
+      if (x == 10) {
+        var fun = function () {
+          console.log("true");
+        };
+        fun();
+    } else {
+          var fun = function () {
+            console.log("false");
+          };
+          fun();
+      }
+      //   if (x == 10) {
+      //     function fun() {
+      //       console.log("hello");
+      //     }
+      //     fun();
+      //   } else {
+      //     function fun() {
+      //       console.log("bye");
+      //     }
+      //     fun();
+      //   }
+    </script>
+  </body>
+</html>

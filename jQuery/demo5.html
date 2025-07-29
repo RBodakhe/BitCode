@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bootstrap Starter Template" />
+    <meta name="author" content="Your Name" />
+    <title>My Bootstrap Template</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons (Correct Version) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="modal fade" id="mypopup">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="#">
+              <div class="modal-header">
+                <h1>Product Details</h1>
+                <button class="btn btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="img">
+                      <img id="mImg" alt="" />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="desc">
+                      <table>
+                        <tr>
+                          <th>Product ID</th>
+                          <td>
+                            <input type="number" id="txtProdId" readonly />
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Product Title</th>
+                          <td>
+                            <input type="text" id="txtProdTitle" readonly />
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Product Price</th>
+                          <td>
+                            <input type="text" id="txtProdPrice" />
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button id="btnUpdate" class="btn btn-warning">
+                  <!-- </button>data-bs-dismiss="modal"> -->
+                  update
+                </button>
+                <button id="btnDelete" class="btn btn-danger">
+                  <!-- </button> data-bs-dismiss="modal"> -->
+                  delete
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <h1 class="text-center text-primary">
+        <i class="bi bi-house"></i> AJAX Request Using JQuery
+        <i class="bi bi-house"></i>
+      </h1>
+    </div>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          <div id="btn">
+            <button
+              id="btnGetCategories"
+              class="form-control btn btn-outline-warning"
+            >
+              Get Categories
+            </button>
+          </div>
+          <div id="select" style="display: none">
+            <select class="form-control" id="sltCategories">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row m-5" id="tableRow" style="display: none">
+        <div class="col">
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="bg-dark text-light text-center">
+              <tr>
+                <th>Product ID</th>
+                <th>Product Title</th>
+                <th>Product Price</th>
+                <th>Product Image</th>
+              </tr>
+            </thead>
+            <tbody id="tbody" class="text-center"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- JQuery -->
+    <script>
+      $(document).ready(() => {
+        $("#btnGetCategories").click(() => {
+          $.ajax({
+            method: "get",
+            url: "https://dummyjson.com/products/category-list",
+            // body: "",
+            success: (data, status) => {
+              //   console.log(status);
+              let opts = "<option value='null'>Select Category</option>";
+              console.log(data);
+              $.each(data, (index, value) => {
+                // console.log(value);
+                opts += `<option>${value}</option>`;
+              });
+              $("#sltCategories").html(opts);
+              $("#sltCategories").change(() => {
+                let category = $("#sltCategories").val();
+                if (!category) {
+                  $("#tableRow").hide();
+                  return;
+                }
+                $.get(
+                  "https://dummyjson.com/products/category/" + category,
+                  (data, status) => {
+                    // console.log(data);
+                    let trs = "";
+                    $.each(data.products, (index, value) => {
+                      trs += `
+                          <tr data-bs-target="#mypopup" data-bs-toggle="modal">
+                              <td>${value.id}</td>
+                              <td>${value.title}</td>
+                              <td>₹${(value.price * 85).toFixed(2)}</td>
+                              <td >
+                                  <img src="${
+                                    value.thumbnail
+                                  }" style="width:100px" />
+                                  </td>
+                              </tr>
+                          `;
+                    });
+                    $("#tbody").html(trs);
+
+                    $("#tableRow").show();
+
+                    $("#tbody").click((e) => {
+                      let tr = e.target.closest("tr");
+                      let tds = tr.children;
+                      console.log(tds);
+                      $("#txtProdId").val($(tds[0]).text());
+                      $("#txtProdTitle").val($(tds[1]).text());
+                      $("#txtProdPrice").val($(tds[2]).text().slice(1));
+                      //   console.log($(tds[3]).find("img").attr("src"))
+                      $("#mImg").attr("src", $(tds[3]).find("img").attr("src"));
+                      //   console.log();
+                    });
+                  }
+                );
+              });
+            },
+            // error: () => {},
+          });
+          $("#btn").hide();
+          $("#select").show();
+        });
+        $("#btnUpdate").click(() => {
+          // alert()
+          let prodId = $("#txtProdId").val();
+          let newPrice = ($("#txtProdPrice").val() / 85).toFixed(2);
+          console.log(newPrice, prodId);
+          $.ajax({
+            url: "https://dummyjson.com/products/" + prodId,
+            method: "PUT",
+            contentType: "application/json", 
+            dataType: "json", 
+            data: JSON.stringify({ price: newPrice }), 
+            success: function (data) {
+              console.log("Updated product:", data);
+              // alert("✅ Product price updated successfully!");
+              $("#mypopup").modal("hide");
+              $("#tbody tr").each(function () {
+                if ($(this).find("td").eq(0).text() == prodId) {
+                  $(this).find("td").eq(0).text(prodId);
+                  $(this)
+                    .find("td")
+                    .eq(2)
+                    .text("₹" + (newPrice * 85).toFixed(2));
+                }
+              });
+            },
+            error: function (xhr, status, error) {
+              console.error("❌ Update failed:", error);
+              alert("❌ Failed to update product price.");
+            },
+          });
+        });
+        $("#btnDelete").click(() => {
+          let prodId = $("#txtProdId").val();
+
+          $.ajax({
+            url: "https://dummyjson.com/products/" + prodId,
+            method: "delete",
+
+            success: function (data) {
+              console.log("delte product:", data);
+              // alert("✅ Product delted  successfully!");
+              $("#mypopup").modal("hide");
+              $("#tbody tr").each(function () {
+                if ($(this).find("td").eq(0).text() == prodId) {
+                  $(this).remove();
+                }
+              });
+            },
+            error: function (xhr, status, error) {
+              console.error("❌ Update failed:", error);
+              alert("❌ Failed to delete product .");
+            },
+          });
+        });
+      });
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

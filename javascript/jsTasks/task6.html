@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="main">
+      <input type="number" value="0" id="txtNum" placeholder="Enter a number" />
+      <input type="button" value="Is Magic No." id="btnCheck" />
+      <p id="result"></p>
+      <script>
+        let txtNum = document.getElementById("txtNum");
+        let btnCheck = document.getElementById("btnCheck");
+        let result = document.getElementById("result");
+
+        btnCheck.addEventListener("click", isMagicNum);
+
+        function isMagicNum() {
+          let num = parseInt(txtNum.value);
+
+          let digit = checkNum(num);
+          if (digit == 1) {
+            console.log("last value", digit);
+            result.textContent = num + " is a magic no";
+          } else {
+            console.log("last value", digit);
+            result.textContent = num + " is not a magic no";
+          }
+
+          //   alert(sum);
+        }
+
+        function checkNum(num) {
+          let temp = num;
+          let sum = 0;
+          while (temp > 0) {
+            var digit = temp % 10;
+            sum += digit;
+            temp = parseInt(temp / 10);
+          }
+          if (sum > 9) {
+            console.log("iteration", sum);
+            sum = checkNum(sum);
+          }
+          console.log("return", sum);
+          return sum;
+        }
+      </script>
+    </div>
+  </body>
+</html>

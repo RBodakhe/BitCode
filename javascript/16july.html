@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img src="i.jpj" alt="no img" onerror="alert()">
+    <button onclick="myError()">click</button>
+
+
+    <script>
+      function fun(a = 0) {
+        try {
+          if (isNaN(a)) {
+            throw new TypeError(a + " is not a number");
+          } else {
+            let sum = 7 + a;
+            console.log("sum: ", sum);
+          }
+        } catch (error) {
+          document.writeln(error);
+        } finally {
+          console.log("finally block");
+        }
+      }
+
+    //   fun();
+    //   fun(4);
+    //   fun("hello");
+
+    window.onerror=function(event,source,lineno,colno,error){
+        document.writeln("<br>event",event);
+        document.writeln("<br>source",source);
+        document.writeln("<br>lineno",lineno);
+        document.writeln("<br>colno",colno);
+        document.writeln("<br>error",error);
+    };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      window.document.write("Hello from javascript<br>");
+      document.write("no need to specify <del>window</del> object in script");
+      /*
+      Data types in Javascript
+      1. undefined
+      2. number
+      3. string
+      4. boolean
+      5. object
+      */
+
+      var x; //variable declaration
+      // if we don't assign any value to variable then it's type is undefined
+      document.write("<br>" + typeof x);
+      x = 90; //data type is number
+      x = 9.9; //data type is also number here because javascript consider integer and floating point only number
+      x = "hii"; //string
+      x = "hello"; // string
+      x = "10"; // also string because any thing in double quotes or single quotes is considered as string in javascript
+      x = true; //boolean there are two values (true and false)
+
+      //   anythig rest  is considered as object
+      x = [];
+      x = {};
+      x = null;
+
+      x = "true";
+      document.write("<br>" + typeof x);
+
+      console.log("3.147878", (3.147878).toFixed(2));
+
+      function add(num1, num2) {
+        // sum = num1 + num2; // scope of sum is global accessible outside function body({})
+        var sum = num1 + num2; // scope of sum is local only in function body({})
+        console.log(sum);
+        return sum;
+      }
+      add(10, 30);
+
+      document.body.bgColor="gray";
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button"  value="click" onclick="addFun()">
+    <div id="d1">Bitcode !!!!!!</div>
+    <script>
+        var div = document.getElementById("d1");
+        function addFun(){
+            div.innerHTML+="<br><b>Hello</b>";
+        }
+    </script>
+</body>
+</html>
+
+<!-- 
+var x; // Declaring a variable 'x'
+
+// If no value is assigned, the type of 'x' is 'undefined'
+document.write("<br>" + typeof x);
+
+x = 90; // Number (integer)
+x = 9.9; // Number (floating-point); JavaScript treats both as 'number'
+
+x = "hii"; // String (double quotes)
+x = 'hello'; // String (single quotes)
+x = '10'; // String (though it looks like a number, quotes make it a string)
+
+x = true; // Boolean (can be true or false)
+
+x = []; // Object (Array is a type of object in JavaScript)
+x = {}; // Object (Plain object)
+
+x = null; // Special value representing 'no value'; type is 'object' (this is a quirk in JavaScript)
+
+x = document.write("<br>" + typeof x); // Displaying the final type of 'x'
+
+-->

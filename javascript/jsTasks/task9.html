@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .condition-pass {
+        color: limegreen;
+      }
+      .condition-fail {
+        color: red;
+      }
+      #passlist {
+        list-style-type: none;
+        display: none;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: inline-block;
+        margin: 10px 5px 5px 0;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      select {
+        padding: 8px;
+        margin: 5px 0 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin: 0 5px 0 10px;
+      }
+
+      input[type="button"] {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        /* margin-top: 25px; */
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        /* margin-left: 43%; */
+      }
+
+      input[type="button"]:hover {
+        background-color: #45a049;
+      }
+      div.container {
+        width: 100%;
+        height: 100%;
+      }
+      div.container div {
+        width: 49%;
+        height: auto;
+        display: inline-block;
+        vertical-align: top;
+      }
+      table {
+        width: 60%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        padding: 12px 18px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
+
+      table tr:first-child th {
+        background-color: #666;
+        color: #fff;
+      }
+
+      table tr:nth-child(n + 2) th,
+      table tr:nth-child(n + 2) td {
+        background-color: #e0e0e0;
+        color: #333;
+      }
+
+      table tr:hover td,
+      table tr:hover th {
+        background-color: #d0d0d0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <form action="#">
+          <h1 class="">Fill Student's Details</h1>
+          <label>Student Full Name:</label>
+          <input type="text" placeholder="first name" />
+          <input type="text" placeholder="last name" /><br />
+          <label>Password:</label>
+          <input
+            type="password"
+            placeholder="password"
+            oninput="checkPasswdStrength()"
+          />
+          <input
+            type="button"
+            value="Check Password Strength"
+            onclick="checkPasswdStrength()"
+          /><br />
+
+          <ol id="passlist"></ol>
+
+          <br /><label>Result:</label>
+          <input type="radio" value="Pass" name="result" />
+          <label>Pass</label>
+          <input type="radio" value="Fail" name="result" />
+          <label>Fail</label><br />
+          <label>Select City:</label>
+          <select name="" id="">
+            <option value="">select city</option>
+            <option value="Pune">Pune</option>
+            <option value="Sagali">Sagali</option>
+            <option value="Satara">Satara</option>
+            <option value="Solapur">Solapur</option>
+            <option value="Kohlapur">Kohlapur</option></select
+          ><br />
+          <label>Select Subjects:</label><br />
+          <input type="checkbox" value="C" />
+          <label for="">C</label>
+          <input type="checkbox" value="C++" />
+          <label for="">C++</label>
+          <input type="checkbox" value="C#" />
+          <label for="">C#</label>
+          <input type="checkbox" value="Java" />
+          <label for="">Java</label>
+          <input type="checkbox" value="Python" />
+          <label for="">Python</label><br />
+          <label
+            id="errorMsg"
+            style="color: red; text-align: center; width: 100%"
+          ></label
+          ><br />
+          <input type="button" value="Save" onclick="displayDetails()" />
+          <input type="button" value="Clear" onclick="clearData()" />
+          <input
+            type="button"
+            value="Update"
+            onclick="updateDetails()"
+            style="display: none"
+          />
+        </form>
+      </div>
+      <div class="table">
+        <h1>Student Details</h1>
+        <table>
+          <tr>
+            <th>Feild</th>
+            <th>Data</th>
+          </tr>
+          <tr>
+            <th>Name:</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Password:</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>City:</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Subjects:</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Result:</th>
+            <td></td>
+          </tr>
+        </table>
+        <div style="text-align: center; width: 100%; padding-top: 20px">
+          <input
+            type="button"
+            value="Update Details"
+            onclick="fetchDetails()"
+            style="display: none"
+          />
+        </div>
+      </div>
+    </div>
+    <script>
+      // Read username[text], password[password], result[radio btn(pass,fail)] city[drop-down] subject[checkboxs]
+      // place one button and onclick on that button display student details in the table format.
+
+      let txtBoxs = document.querySelectorAll("input[type=text]");
+      let txtPass = document.querySelector("input[type=password]");
+      let radioBtns = document.getElementsByName("result");
+      let selectBox = document.querySelector("select");
+      let checkboxs = document.querySelectorAll("input[type=checkbox]");
+      let tds = document.querySelectorAll("td");
+      let errorMsg = document.getElementById("errorMsg");
+
+      let buttons = document.querySelectorAll("input[type=button]");
+      buttons.forEach((btn) => {
+        console.log(btn.value);
+      });
+
+      let stud1 = {};
+      //   console.log(txtBoxs);
+      //   console.log(txtPass);
+      //   console.log(radioBtns);
+      //   console.log(selectBox);
+      //   console.log(checkboxs);
+      function clearData() {
+        tds.forEach((td) => (td.textContent = ""));
+        document.querySelector("form").reset();
+        errorMsg.textContent = "";
+        document.querySelector("#passlist").innerHTML = "";
+        buttons[1].style.display = "inline";
+        buttons[4].style.display = "none";
+      }
+      let counter = 0;
+      function displayDetails() {
+        if (txtBoxs[0].value == "" || txtBoxs[1].value == "") {
+          if (txtBoxs[0].value == "") {
+            txtBoxs[0].focus();
+          } else {
+            txtBoxs[1].focus();
+          }
+          errorMsg.textContent =
+            "Please fill student name first name and last name both";
+          return;
+        } else if (txtPass.value == "") {
+          txtPass.focus();
+          errorMsg.textContent = "Please fill Password";
+          return;
+        } else if (!radioBtns[0].checked && !radioBtns[1].checked) {
+          radioBtns[0].focus();
+          errorMsg.textContent = "Select result pass or fail";
+          return;
+        } else if (selectBox.value == "") {
+          selectBox.focus();
+          errorMsg.textContent = "Please select city";
+          return;
+        } else {
+          errorMsg.textContent = "";
+        }
+        if (!isStrong) {
+          alert(
+            "please enter strong password no of attempt left " + (2 - counter)
+          );
+          counter++;
+          if (counter == 3) {
+            document.body.innerHTML =
+              "<h1 style='color:red;font-weight:bolder;font-size:50px;'>Too many tries please try again later<H1>";
+          }
+          return;
+        }
+        let selectedSubjects = getSubjects().join(", ");
+        stud1.name = txtBoxs[0].value + " " + txtBoxs[1].value;
+        stud1.passwd = txtPass.value;
+        stud1.result = radioBtns[0].checked
+          ? radioBtns[0].value
+          : radioBtns[1].value;
+        stud1.city = selectBox.value;
+        stud1.subjects =
+          selectedSubjects == "" ? "No subject selected" : selectedSubjects;
+        console.log(stud1);
+        tds[0].textContent = stud1.name;
+        tds[1].textContent = stud1.passwd;
+        tds[2].textContent = stud1.city;
+        tds[3].textContent = stud1.subjects;
+        tds[4].textContent = stud1.result;
+        buttons[1].style.display = "none";
+        buttons[4].style.display = "inline";
+        document.querySelector("form").reset();
+        errorMsg.textContent = "";
+        document.querySelector("#passlist").innerHTML = "";
+      }
+      function getSubjects() {
+        let subArr = [];
+        for (let i = 0; i < checkboxs.length; i++) {
+          if (checkboxs[i].checked) {
+            subArr.push(checkboxs[i].value);
+          }
+        }
+        return subArr;
+      }
+    </script>
+
+    <script>
+      // read password form user and check password is strong or not.
+      // 1. length >= 8
+      // 2. atleast one lowercase character
+      // 3. atleast one uppercase character
+      // 4. atleast two digits
+      // 5. atleast one special character[!#$&*]
+      // 6. Only allowed characters [a-z,A-Z,0-9,!#$&*]
+
+      let txtPasswd = document.querySelector("input[type=password]");
+      let passlist = document.querySelector("#passlist");
+      let isStrong = false;
+      function checkPasswdStrength() {
+        let password = txtPasswd.value;
+        let strLi = "";
+
+        if (password === "") {
+          passlist.style.display = "none";
+          txtPasswd.style.borderColor = "";
+          return;
+        }
+
+        let isPassStonge = password.length >= 8;
+
+        let containsLowerCase = false;
+        let containsUpperCase = false;
+        let containsTwoDigits = false;
+        let containsSpecialSymbol = false;
+        let isOnlyAllowedChars = true;
+
+        let digitCount = 0;
+        const allowedChars =
+          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$&*";
+        const specialChars = "!#$&*";
+
+        for (let i = 0; i < password.length; i++) {
+          let ch = password[i];
+          if (ch == ch.toLowerCase() && ch != ch.toUpperCase())
+            containsLowerCase = true;
+          if (ch == ch.toUpperCase() && ch != ch.toLowerCase())
+            containsUpperCase = true;
+          if (ch >= "0" && ch <= "9") digitCount++;
+          if (specialChars.includes(ch)) containsSpecialSymbol = true;
+          if (!allowedChars.includes(ch)) isOnlyAllowedChars = false;
+        }
+
+        containsTwoDigits = digitCount >= 2;
+
+        strLi += getConditionHTML(
+          isPassStonge,
+          " Password length should be >= 8"
+        );
+        strLi += getConditionHTML(
+          containsLowerCase,
+          " Contains at least one lowercase character"
+        );
+        strLi += getConditionHTML(
+          containsUpperCase,
+          " Contains at least one uppercase character"
+        );
+        strLi += getConditionHTML(
+          containsTwoDigits,
+          " Contains at least two digits"
+        );
+        strLi += getConditionHTML(
+          containsSpecialSymbol,
+          " Contains at least one special symbol (!#$&*)"
+        );
+        strLi += getConditionHTML(
+          isOnlyAllowedChars,
+          " Contains only allowed characters (a-z, A-Z, 0-9, !#$&*)"
+        );
+
+        // Final summary (only on button click)
+        isStrong =
+          isPassStonge &&
+          containsLowerCase &&
+          containsUpperCase &&
+          containsTwoDigits &&
+          containsSpecialSymbol &&
+          isOnlyAllowedChars;
+        if (event.currentTarget.type === "button") {
+          strLi += `<li class='${
+            isStrong ? "condition-pass" : "condition-fail"
+          }'>
+      <h3>Password is ${isStrong ? "Strong ✅" : "Weak ❌"}</h3></li>`;
+        }
+
+        passlist.innerHTML = strLi;
+        passlist.style.display = "block";
+        txtPasswd.style.borderColor = isOnlyAllowedChars ? "limegreen" : "red";
+      }
+
+      function getConditionHTML(condition, msg) {
+        return `<li class='${condition ? "condition-pass" : "condition-fail"}'>
+          <span>${condition ? "&#10004;" : "&#10060;"}</span> ${msg}</li>`;
+      }
+
+      function fetchDetails() {
+        txtBoxs[0].value = stud1.name.split(" ")[0];
+        txtBoxs[1].value = stud1.name.split(" ")[1];
+        txtPass.value = stud1.passwd;
+        if (stud1.result == "Pass") {
+          radioBtns[0].checked = true;
+        } else {
+          radioBtns[1].checked = true;
+        }
+        selectBox.value = stud1.city;
+        let subs = stud1.subjects.split(", ");
+        for (let i = 0; i < subs.length; i++) {
+          for (let j = 0; j < checkboxs.length; j++) {
+            if (checkboxs[j].value == subs[i]) {
+              checkboxs[j].checked = true;
+            }
+          }
+        }
+        buttons[3].style.display = "inline";
+        buttons[4].style.display = "none";
+        document.querySelector("h1").textContent = "Update Student's Details";
+      }
+      console.log(txtPasswd);
+    </script>
+  </body>
+</html>
+
+<!-- // function checkPasswdStrength() {
+          //   let password = txtPasswd.value;
+          //   let strLi = "";
+          //   if (password === "") {
+          //     passlist.style.display = "none";
+          //     return;
+          //   }
+          //   let isPassStonge = (() => {
+          //     return password.length >= 8;
+          //   })();
+          //   let containsLowerCase = (() => {
+          //     for (let i = 0; i < password.length; i++) {
+          //       if (
+          //         password[i] == password[i].toLowerCase() &&
+          //         password[i] != password[i].toUpperCase()
+          //       ) {
+          //         return true;
+          //       }
+          //     }
+          //     return false;
+          //   })();
+          //   let containsUpperCase = (() => {
+          //     for (let i = 0; i < password.length; i++) {
+          //       if (
+          //         password[i] == password[i].toUpperCase() &&
+          //         password[i] != password[i].toLowerCase()
+          //       ) {
+          //         return true;
+          //       }
+          //     }
+          //     return false;
+          //   })();
+          //   let containsTwoDigits = (() => {
+          //     let count = 0;
+          //     for (let i = 0; i < password.length; i++) {
+          //       if (password[i] >= "0" && password[i] <= "9") {
+          //         count++;
+          //       }
+          //       if (count > 1) {
+          //         return true;
+          //       }
+          //     }
+          //     return false;
+          //   })();
+          //   let containsSpecialSymbol = (() => {
+          //     let symbols = "!#$&*";
+          //     for (let i = 0; i < password.length; i++) {
+          //       for (let j = 0; j < symbols.length; j++) {
+          //         if (password[i] == symbols[j]) {
+          //           return true;
+          //         }
+          //       }
+          //     }
+          //     return false;
+          //   })();
+          //   let isOnlyAllowedChars = (() => {
+          //     const allowedChars =
+          //       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$&*";
+          //     for (let i = 0; i < password.length; i++) {
+          //       if (!allowedChars.includes(password[i])) {
+          //         return false;
+          //       }
+          //     }
+          //     return true;
+          //   })();
+    
+          //   strLi += getConditionHTML(
+          //     isPassStonge,
+          //     " Password length should be greater than or equal to 8"
+          //   );
+          //   strLi += getConditionHTML(
+          //     containsLowerCase,
+          //     " Contains atleast one lowercase character"
+          //   );
+          //   strLi += getConditionHTML(
+          //     containsUpperCase,
+          //     " Contains atleast one uppercase character"
+          //   );
+          //   strLi += getConditionHTML(
+          //     containsTwoDigits,
+          //     " Contains atleast two digits"
+          //   );
+          //   strLi += getConditionHTML(
+          //     containsSpecialSymbol,
+          //     " Contains atleast one special symbol (!#$&*)[only allowed characters]"
+          //   );
+          //   strLi += getConditionHTML(
+          //     isOnlyAllowedChars,
+          //     " Contains only allowed characters (a-z, A-Z, 0-9, !#$&*)"
+          //   );
+    
+          //   if (event.currentTarget.type == "button") {
+          //     let isStrong =
+          //       isPassStonge &&
+          //       containsLowerCase &&
+          //       containsUpperCase &&
+          //       containsTwoDigits &&
+          //       containsSpecialSymbol &&
+          //       isOnlyAllowedChars;
+          //     strLi = `<li class='${
+          //       isStrong ? "condition-pass" : "condition-fail"
+          //     }><h3>Password is ${isStrong ? "Strong ✅" : "Weak ❌"} </h3></li>`;
+          //     console.log("Password is " + (isStrong ? "Strong ✅" : "Weak ❌"));
+          //   }
+          //   passlist.innerHTML = strLi;
+          //   txtPasswd.style.borderColor = isOnlyAllowedChars ? "limegreen" : "red";
+          //   passlist.style.display = "block";
+          // } -->

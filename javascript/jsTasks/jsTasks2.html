@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>String Processing</title>
+  </head>
+  <body>
+    <textarea
+      type="text"
+      id="txtStr"
+      placeholder="Enter string here"
+      oninput="processString()"
+      rows="10"
+      cols="100"
+    ></textarea>
+    <div>
+      <h3>Capitalized String (First letter of each word capitalized)</h3>
+      <p id="op1"></p>
+      <h3>Reversed Words (Each word reversed)</h3>
+      <p id="op2"></p>
+      <h3>Encrypted String</h3>
+      <p id="op3"></p>
+    </div>
+    <script>
+      let txtStr = document.getElementById("txtStr");
+      let output1 = document.getElementById("op1");
+      let output2 = document.getElementById("op2");
+      let output3 = document.getElementById("op3");
+      function processString() {
+        let str = txtStr.value;
+        output1.textContent = getCapitalizedStr(str);
+        output2.textContent = getReverseWordsStr(str);
+        output3.textContent = getEncryptedStr(str);
+      }
+
+      function getEncryptedStr(str) {
+        newStr = "";
+        for (let i = 0; i < str.length; i++) {
+          if (i % 2 == 0) {
+            newStr += str[i];
+          } else {
+            // get character code of alternate characters
+            let charCode = str.charCodeAt(i);
+            //   add 1 to charcode to get next char
+            newStr += String.fromCharCode(charCode + 1);
+          }
+        }
+        return newStr;
+      }
+      let str = "This is bitCode";
+      function getCapitalizedStr(str) {
+        let newStr = "";
+        let strArr = str.split(" ");
+        for (let i = 0; i < strArr.length; i++) {
+          if (strArr[i] != "") {
+            newStr +=
+              strArr[i][0].toUpperCase() +
+              strArr[i].slice(1).toLowerCase() +
+              " ";
+          }
+        }
+        return newStr;
+      }
+      console.log(getCapitalizedStr(str));
+
+      function getReverseWordsStr(str) {
+        let newStr = "";
+        let strArr = str.split(" ");
+        for (let i = 0; i < strArr.length; i++) {
+          for (let j = strArr[i].length - 1; j > -1; j--) {
+            newStr += strArr[i][j];
+          }
+          newStr += " ";
+        }
+        return newStr;
+      }
+
+      console.log(getReverseWordsStr(str));
+    </script>
+  </body>
+</html>

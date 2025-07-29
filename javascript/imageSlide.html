@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="main">
+      <div id="img">
+        <img id="imgT" src="" height="400px" width="400px" alt="" />
+      </div>
+      <div id="btns">
+        <button value="start">start</button>
+        <button value="slow">slow -</button>
+        <button value="fast">fast +</button>
+        <button value="stop">stop</button>
+      </div>
+    </div>
+    <script>
+      // let imgArr = [
+      //   "https://www.worldometers.info/img/flags/in-flag.gif",
+      //   "https://www.worldometers.info/img/flags/id-flag.gif",
+      //   "https://www.worldometers.info/img/flags/np-flag.gif",
+      //   "https://www.worldometers.info/img/flags/us-flag.gif",
+      //   "https://www.worldometers.info/img/flags/pk-flag.gif",
+      //   "https://www.worldometers.info/img/flags/au-flag.gif",
+      //   "https://www.worldometers.info/img/flags/bt-flag.gif",
+      //   "https://www.worldometers.info/img/flags/ae-flag.gif",
+      // ];
+
+      imgArr=["../bitcode/asset/images/java.png",
+        "../bitcode/asset/images/mern.png",
+        "../bitcode/asset/images/mean.png",
+        "../bitcode/asset/images/python.png",
+      ]
+      let imgT = document.getElementById("imgT");
+      let timeInterval = 1000;
+      let intervalId = null;
+      let index = imgArr.length - 1;
+      imgT.src = imgArr[index];
+      document
+        .getElementById("btns")
+        .addEventListener("click", function (event) {
+          if (event.target.nodeName == "BUTTON") {
+            console.log(event.target.value);
+            switch (event.target.value) {
+              case "start":
+                if (!intervalId) {
+                  clearInterval(intervalId);
+                  intervalId = setInterval(slideImgs, timeInterval);
+                }
+                break;
+              case "stop":
+                clearInterval(intervalId);
+                break;
+              case "slow":
+                clearInterval(intervalId);
+                timeInterval = Math.min(10000, timeInterval + 500);
+                console.log(timeInterval);
+                intervalId = setInterval(slideImgs, timeInterval);
+                break;
+              case "fast":
+                clearInterval(intervalId);
+                timeInterval = Math.max(100, timeInterval - 500);
+                console.log(timeInterval);
+                intervalId = setInterval(slideImgs, timeInterval);
+                break;
+            }
+          }
+        });
+
+      function slideImgs() {
+        index++;
+        if (index >= imgArr.length) {
+          index = 0;
+        }
+        imgT.src = imgArr[index];
+      }
+    </script>
+  </body>
+</html>

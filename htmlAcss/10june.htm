@@ -1,0 +1,279 @@
+<!-- Desing a html table with five rows with diffrent color for odd rows and even rows
+for even bule for background and white for font and odd row with orange background and red font -->
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Document</title>
+    <style>
+        table{
+            width: 50%;
+        }
+        tr{
+            padding: 10px;
+            height: 50px;
+        }
+        #Heading{
+            background-color: #000;
+            color: #fff;
+        }
+        .odd{
+            background-color: orange;
+            color: red;
+        }
+        .even{
+            background-color: blue;
+            color: white;
+        }
+        /* selectors */
+        /* 1. Tag */
+        /* 2. id */
+        /* 3. class */
+        /* 4. ','(comma) selctor: apply css to all tags separated by comma (general selector)*/
+        /* div,p{
+            background-color: lightblue;
+        } */
+        /* ' '(space) and '>'(Greater than) : apply css to childerns of first tag*/
+        /* div p{
+            background-color: lightblue;
+        }
+        div > p{
+            background-color: lightblue;
+
+        } */
+        /* +(plus): apply css to next immediate sibling */
+        /* div + p{
+            background-color: lightblue;
+
+        } */
+        
+        /* ~(tild): apply css to all next immediate siblings */
+        /* div ~ p{
+            background-color: lightblue;
+
+        } */
+         .div{
+            box-sizing: border-box;
+            width: 200px;
+            height:  200px;
+            background-color: #fff;
+            /* border-radius: topLeft topRight bottomRight bottomLeft; */
+            /* border-radius: 50% 0px  0px 50%; */
+            border-radius: 50%;
+
+            /* box-shadow:x y blur color */
+            box-shadow:2px -3px 2px red,
+                        4px -6px 4px blue,
+                        -2px 3px 2px blue,
+                        -4px 6px 4px red;
+            padding: 50px;
+
+            font-size: 15px;
+            color:  #fff;
+            /* text-shadow: x y blur color */
+            text-shadow:10px 10px 0px gray,
+                         -10px -10px 0px black;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bolder;
+            text-align-last: center;
+
+            
+        }
+        .m{
+             /* background-clip:[border-box, padding-box, content-box] */
+             height: 100px;
+             width: 100px;
+             border: 10px dotted blue;
+             background-color: lightblue;
+             background-clip: border-box;
+             /* default */
+
+             /* box-sizing: [content-box(default), border-box] */
+             box-sizing: border-box;
+             
+
+         }
+         #d2{
+            padding: 20px;
+            box-sizing: border-box;
+         }
+    </style>
+</head>
+<body>
+    <div class="m"></div>
+    <div class="m" id="d2"></div>
+    <div>
+        Hello World 
+    </div> -->
+    <!-- <p>This is p1</p>
+    <div>
+        This is div
+        <p>This is p2</p>
+        <p>This is p3</p>
+        <p>This is p4</p>
+    </div>
+    <p>This is p5</p>
+    <p>This is p6</p> -->
+    <!-- <table>
+        <tr id="Heading">
+            <th>
+                Sr. No
+            </th>
+            <th>
+                Book Name
+            </th>
+            <th>
+                No. Of Pages
+            </th>
+        </tr>
+        <tr class="odd">
+            <td>1</td>
+            <td>Marathi</td>
+            <td>100</td>
+        </tr>
+        <tr class="even">
+            <td>2</td>
+            <td>Hindi</td>
+            <td>45</td>
+        </tr>
+        <tr class="odd">
+            <td>3</td>
+            <td>English</td>
+            <td>90</td>
+        </tr>
+        <tr  class="even">
+            <td>4</td>
+            <td>Kannada</td>
+            <td>75</td>
+        </tr>
+        <tr class="odd">
+            <td>5</td>
+            <td>Tamil</td>
+            <td>35</td>
+        </tr>
+    </table> -->
+<!-- </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 150px;
+            width: 150px;
+            border: 2px solid red;
+        }
+        /* object-fit:[cover , fill, contain, scale-down] */
+        #i2{
+            object-fit: fill;
+        }
+        #i3{
+            object-fit: contain;
+        }
+        #i4{
+            object-fit: cover;
+        }
+        #i5{
+            object-fit: scale-down;
+            opacity: 0.5;
+        }
+         td{
+            text-align: center;
+         }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td colspan="4">
+
+             Original
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+
+                <img src="img6.jpg" alt=""> <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                fill (default)
+            </td>
+            <td>
+                cover
+            </td>
+            <td>
+                contain
+            </td>
+            <td>
+                scale-down
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="img6.jpg" id="i2" alt="" >
+                
+            </td>
+            <td>
+                <img src="img6.jpg" id="i3" alt="">
+
+            </td>
+            <td>
+                <img src="img6.jpg" id="i4" alt="">
+
+            </td>
+            <td>
+                <img src="img6.jpg" id="i5" alt="">
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div img{
+            height: 400px;
+            width: 500px;
+            border: 1px solid black;
+            position: relative;
+        }
+        div p{
+            width: 250px;
+            height: 100px;
+            position: absolute;
+            top: 150px;
+            left: 150px;
+            border: 1px solid white;
+            background-color: #0ff010;
+            opacity: 0.5;
+            box-sizing: border-box;
+            padding-top: 30px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+           
+            border-radius: 50% 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <img src="trekkON.jpg" alt="">
+        <p>BitCode Technologies</p>
+    </div>
+</body>
+</html>

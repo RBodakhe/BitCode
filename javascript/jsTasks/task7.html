@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        width: 100vw;
+        background-color: wheat;
+        padding: 10%;
+      }
+      .div {
+        width: 40%;
+        height: 50%;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .lbl,
+      .inp {
+        width: 70%;
+        height: 40px;
+        display: block;
+      }
+      .btn {
+        width: 20%;
+        height: 40px;
+      }
+      .btn:hover {
+        background-color: lightgreen;
+        border: none;
+      }
+      #list {
+        font-size: 20px;
+        font-weight: bold;
+        color: rgb(41, 11, 41);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div">
+      <label class="lbl" for="txtName">Product Name:</label>
+      <input class="inp" type="text" id="txtName" /><br />
+      <label class="lbl" for="txtPrice">Product Price:</label>
+      <input class="inp" type="number" id="txtPrice" /><br />
+      <input class="btn" type="button" value="add" onclick="addProduct()" />
+      <input
+        class="btn"
+        type="button"
+        value="update"
+        onclick="updateProduct()"
+      />
+      <input
+        class="btn"
+        type="button"
+        value="delete"
+        onclick="deleteProduct()"
+      />
+    </div>
+    <div class="div">
+      <ol id="list">
+        <!-- <li>jhhjk</li> -->
+      </ol>
+    </div>
+    <div class="div">
+      <h3>Card</h3>
+      <table>
+        <tr>
+            <th>sr.no.</th>
+            <th>product name</th>
+            pr
+        </tr>
+      </table>
+    </div>
+    <script>
+      let txtName = document.getElementById("txtName");
+      let txtPrice = document.getElementById("txtPrice");
+      let list = document.getElementById("list");
+
+      list.addEventListener("click", function (event) {
+        let str = event.target.textContent;
+        txtName.value = str.split(": ")[0];
+        txtPrice.value = str.split(": ")[1];
+        txtName.readOnly = true;
+      });
+      let prodArr = [];
+
+      function Product(name, price) {
+        this.prodName = name;
+        this.prodPrice = price;
+      }
+      function addProduct() {
+        let prodName = txtName.value;
+        let prodPrice = txtPrice.value;
+        if (prodName == "" || prodPrice == "") {
+          return;
+        }
+        if (isPresent(prodName) == -1) {
+          prodArr.push(new Product(prodName, prodPrice));
+        }
+        // prodArr = new Set(prodArr);
+
+        display();
+
+        txtName.value = "";
+        txtPrice.value = "";
+        txtName.focus();
+      }
+      function isPresent(prodName) {
+        index = -1;
+        for (let i = 0; i < prodArr.length; i++) {
+          if (prodArr[i].prodName === prodName) {
+            return i;
+          }
+        }
+
+        return index;
+      }
+
+      function display() {
+        let lis = "";
+        for (let i = 0; i < prodArr.length; i++) {
+          //   for (const key in prodArr[i]) {
+          lis += `<li>${prodArr[i].prodName}: ${prodArr[i].prodPrice}</li>`;
+          //   }
+        }
+        list.innerHTML = lis;
+        console.log(prodArr);
+      }
+      function updateProduct() {
+        let name = txtName.value;
+        let price = txtPrice.value;
+        if (name == "" || price == "") {
+          return;
+        }
+        for (let i = 0; i < prodArr.length; i++) {
+          if (prodArr[i].prodName == name) {
+            prodArr[i].prodPrice = price;
+          }
+        }
+        display();
+        txtName.value = "";
+        txtPrice.value = "";
+        txtName.readOnly = false;
+        txtName.focus();
+      }
+
+      function deleteProduct() {
+        let prodName = txtName.value;
+        if (prodName == "") {
+          return;
+        }
+        let index = isPresent(prodName);
+        if (index != -1) {
+          prodArr.splice(index, 1);
+          display();
+        }
+        txtName.value = "";
+        txtPrice.value = "";
+        txtName.readOnly = false;
+        txtName.focus();
+      }
+    </script>
+  </body>
+</html>

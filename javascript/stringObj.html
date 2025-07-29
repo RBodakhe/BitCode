@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>String Methods and Comparison</title>
+  </head>
+  <body>
+    <form id="form">
+  <input type="number" min="0" max="1114111" id="unicode" value="0" /><br />
+  <input type="button" value="Previous" onclick="unicodes(-1)" />
+  <input type="button" value="Next" onclick="unicodes(1)" />
+  <table id="data"></table>
+</form>
+
+<script>
+  const txtCode = document.getElementById("unicode");
+  const table = document.getElementById("data");
+  let code = 0;
+
+  // Prevent form reload
+  document.getElementById("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+
+  function unicodes(direction) {
+    let data = `
+      <tr>
+        <th>Code</th>
+        <th>Character</th>
+      </tr>`;
+
+    // Get current value from input or default to 0
+    code = parseInt(txtCode.value) || 0;
+
+    // Handle direction: previous (-1) or next (1)
+    if (direction !== 1) {
+      code = code - 20;
+      if (code < 0) code = 0;
+    }
+
+    // Generate 10 character rows
+    for (let i = 0; i < 10; i++) {
+      data += `<tr>
+        <td>${code}</td>
+        <td>${String.fromCodePoint(code)}</td>
+      </tr>`;
+      code++;
+    //   String.fromCharCode(code)
+    }
+
+    // Update table and input box
+    table.innerHTML = data;
+    txtCode.value = code;
+  }
+</script>
+
+
+    <script>
+      // ======= Primitive Strings (Stored in Stack) =======
+      var str1 = "Hello";
+      var str2 = "Hello";
+      console.log(str1 == str2); // true: same value
+      console.log(str1 === str2); // true: same value and type
+
+      // ======= String Objects (Stored in Heap) =======
+      var strObj1 = new String("Hello");
+      var strObj2 = new String("Hello");
+
+      console.log(strObj1 == strObj2); // false: different heap objects
+      console.log(strObj1 === strObj2); // false: different references
+
+      console.log(strObj1 == str2); // true: coerced to primitive
+      console.log(strObj1 === str2); // false: object vs primitive
+
+      /**
+       * Summary:
+       * - Primitive strings are stored in stack memory.
+       * - String objects are stored in heap memory.
+       * - '==' allows type coercion; '===' requires both value and type match.
+       */
+
+      // ======= String Methods =======
+      var str = " This is JavaScript ";
+
+      // 1. Returns length of the string
+      document.writeln("<br>str.length: " + str.length);
+
+      // 2. Converts entire string to uppercase
+      document.writeln("<br>str.toUpperCase(): " + str.toUpperCase());
+
+      // 3. Converts to uppercase using locale rules (e.g., Turkish)
+      document.writeln(
+        "<br>str.toLocaleUpperCase('tr'): " + str.toLocaleUpperCase("tr")
+      );
+
+      // 4. Converts entire string to lowercase
+      document.writeln("<br>str.toLowerCase(): " + str.toLowerCase());
+
+      // 5. Converts to lowercase using locale rules
+      document.writeln(
+        "<br>str.toLocaleLowerCase('tr'): " + str.toLocaleLowerCase("tr")
+      );
+
+      // 6. Removes whitespace from both ends
+      document.writeln("<br>str.trim(): " + str.trim());
+
+      // 7. Removes whitespace from start only
+      document.writeln("<br>str.trimStart(): " + str.trimStart());
+
+      // 8. Removes whitespace from end only
+      document.writeln("<br>str.trimEnd(): " + str.trimEnd());
+
+      // 9. Returns character at index 4
+      document.writeln("<br>str.charAt(4): " + str.charAt(4));
+
+      // 10. Finds index of first occurrence of 'i'
+      document.writeln("<br>str.indexOf('i'): " + str.indexOf("i"));
+
+      // 11. Concatenates additional strings
+      document.writeln(
+        "<br>str.concat(...): " +
+          str.concat(
+            "it is used for browser side scripting",
+            "it is based on Ecmo Script"
+          )
+      );
+
+      // 12. Checks if string ends with 'it'
+      document.writeln("<br>str.endsWith('it'): " + str.endsWith("it"));
+
+      // 13. Checks if string starts with ' This'
+      document.writeln(
+        "<br>str.startsWith(' This'): " + str.startsWith(" This")
+      );
+
+      // 14. Searches for position of substring or pattern using regex
+      document.writeln("<br>str.search(' This'): " + str.search(" This"));
+
+      // 15. Replaces ' This' with 'that'
+      document.writeln(
+        "<br>str.replace(' This', 'that'): " + str.replace(" This", "that")
+      );
+
+      // 16. Repeats string 2 times
+      document.writeln("<br>str.repeat(2): " + str.repeat(2));
+
+      // 17. Extracts substring from index 2 to 8 (excluding 8)
+      document.writeln("<br>str.slice(2, 8): " + str.slice(2, 8));
+
+      // 18. Similar to slice; handles negative values differently
+      document.writeln("<br>str.substring(2, 8): " + str.substring(2, 8));
+
+      // 19. Extracts substring from index 2, of length 8
+      document.writeln("<br>str.substr(2, 8): " + str.substr(2, 8));
+
+      // 20. Splits string into array using 'i' as delimiter
+      document.writeln("<br>str.split('i'): " + str.split("i"));
+
+      // 21. Returns character represented by Unicode 10007
+      document.writeln(
+        "<br>String.fromCharCode(10007): " + String.fromCharCode(10007)
+      );
+
+      /**
+       * Notes:
+       * - trimLeft() = trimStart(), trimRight() = trimEnd() (legacy aliases).
+       * - Prefer modern methods for readability and consistency.
+       */
+    </script>
+  </body>
+</html>

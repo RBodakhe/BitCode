@@ -15,7 +15,7 @@
     <button>remove</button>
     <div id="dateBox"></div>
     <script>
-      let nodeList = [];
+      let nodeList = new Array();
       let dateBox = document.querySelector("#dateBox");
       document.querySelectorAll("button").forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -32,9 +32,7 @@
               let langCode = document
                 .querySelector("#txtLangCode")
                 .value.trim();
-                document
-                .querySelector("#txtLangCode")
-                .value="";
+              document.querySelector("#txtLangCode").value = "";
               if (langCode && langCode.length == 2) {
                 langDate(langCode);
               } else {
@@ -63,6 +61,7 @@
         div.innerHTML += str;
         dateBox.appendChild(div);
       }
+
       // langDate("mr");
       // langDate("kn");
       // langDate("ta");

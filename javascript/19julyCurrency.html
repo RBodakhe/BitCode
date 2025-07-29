@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    Choose Currency:
+    <select id="sBox">
+      <option value="inr">Indian Rupee</option>
+      <option value="usd">United States Dollar</option>
+      <option value="cad">Cannadian Dollar</option>
+    </select>
+
+    <table border="1" style="width: 50%; height: 50%; border-collapse: collapse;"></table>
+  </head>
+  <body>
+    <script>
+      let prods = [
+        { prodName: "Marker", prodPrice: 100 },
+        { prodName: "Colors", prodPrice: 500 },
+        { prodName: "Pen", prodPrice: 300 },
+        { prodName: "Note Book", prodPrice: 700 },
+      ];
+      let sBox = document.getElementById("sBox");
+      sBox.addEventListener("change", () => {
+        display(sBox.value);
+      });
+      display(sBox.value);
+
+      function getPrice(cost, currency) {
+        switch (currency) {
+          case "inr":
+            return "₹" + cost;
+            break;
+          case "usd":
+            return "$" + (cost / 86.19).toFixed(2);
+            break;
+          case "cad":
+            return "C$" + (cost / 62.78).toFixed(2);
+            break;
+        }
+      }
+      function display(currency) {
+        let str = ` <tr>
+        <th>#</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+      </tr>`;
+        for (let i = 0; i < prods.length; i++) {
+          str += `
+            <tr>
+            <td>${i + 1}</td>
+            <td>${prods[i].prodName}</td>
+            <td>${getPrice(prods[i].prodPrice, currency)}</td>
+            </tr>
+           `;
+        }
+        document.querySelector("table").innerHTML = str;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Age Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f8ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 400px;
+      }
+      label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+      }
+      input[type="text"],
+      input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      input[type="button"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input[type="button"]:hover {
+        background-color: #0056b3;
+      }
+      table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        width: 30%;
+      }
+
+      .birthday-message {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff4081;
+        animation: blink 1s infinite;
+        text-align: center;
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+    Task One:
+Create a webpage where the user can enter their name and birth date. Provide a button that, when clicked, displays the entered name, birth date, and the calculated age in a div or table. Additionally, if the current date matches the user's birth day and month, display a “Happy Birthday” message along with the details.
+    -->
+    <a href="jsTasks3-2.html">next Task</a>
+    <div class="container">
+      <label>Name:</label>
+      <input type="text" id="txtName" />
+
+      <label>Date of Birth:</label>
+      <input type="date" id="txtDate" />
+
+      <input type="button" value="Calculate Age" onclick="calAge()" />
+
+      <table border="1" id="result"></table>
+
+      <div id="birthdayMsg" class="birthday-message" style="display: none">
+        🎉 Happy Birthday! 🎂 
+      </div>
+    </div>
+
+    <script>
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      let txtName = document.getElementById("txtName");
+      let txtDate = document.getElementById("txtDate");
+      let result = document.getElementById("result");
+      let birthdayMsg = document.getElementById("birthdayMsg");
+
+      function calAge() {
+        if (txtName.value == "" || txtDate.value == "") {
+          alert("Please enter both name and birth date.");
+          return;
+        }
+
+        let name = txtName.value;
+        let dob = new Date(txtDate.value);
+        let currentDate = new Date();
+
+        let age = currentDate.getFullYear() - dob.getFullYear();
+
+        // Adjust if birthday hasn't occurred yet this year
+        const isBeforeBirthday =
+          currentDate.getMonth() < dob.getMonth() ||
+          (currentDate.getMonth() === dob.getMonth() &&
+            currentDate.getDate() < dob.getDate());
+        if (isBeforeBirthday) {
+          age--;
+        }
+
+        let str = `
+        <tr>
+            <th>Name</th>
+            
+            <td>${name}</td>
+        </tr>
+        <tr>
+            <th>Date Of Birth</th>
+            
+            <td>
+                ${dob.getDate()} ${
+          months[dob.getMonth()]
+        } ${dob.getFullYear()}<br>
+                (${days[dob.getDay()]})
+            </td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            
+            <td>${age} years</td>
+        </tr>
+        `;
+
+        result.innerHTML = str;
+
+        if (
+          dob.getDate() === currentDate.getDate() &&
+          dob.getMonth() === currentDate.getMonth()
+        ) {
+          birthdayMsg.style.display = "block";
+        } else {
+          birthdayMsg.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

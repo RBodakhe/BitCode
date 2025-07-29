@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>Min Range: </label>
+    <input type="number" name="" id="minRange" />
+    <br />
+    <label>Max Range: </label>
+    <input type="number" name="" id="maxRange" />
+    <br />
+
+    <button onclick="funPrime()">List of Prime Numbers</button>
+    <button onclick="funOdd()">List of Odd Numbers</button>
+    <button onclick="funEven()">List of Even Numbers</button>
+    <table border="1px" id="data"></table>
+
+    <script>
+      let minRange = document.getElementById("minRange");
+      let maxRange = document.getElementById("maxRange");
+      let table = document.getElementById("data");
+
+      function funEven() {
+        let counter = 1;
+        table.innerHTML = `<tr><td colspan=2>List of Odd nos form ${minRange.value}(inclusive) to ${maxRange.value}(inclusive)</td></tr>`;
+        table.innerHTML += `<tr><td>Serial No</td><td>Odd Nums</td></tr>`;
+        for (let i = minRange.value; i <= maxRange.value; i++) {
+          let num = i;
+          if (num % 2 != 0) {
+            table.innerHTML += `<tr><td>${counter}</td><td>${num}</td></tr>`;
+            counter++;
+          }
+        }
+      }
+      function funOdd() {
+        let counter = 1;
+        table.innerHTML = `<tr><td colspan=2>List of Odd nos form ${minRange.value}(inclusive) to ${maxRange.value}(inclusive)</td></tr>`;
+        table.innerHTML += `<tr><td>Serial No</td><td>Odd Nums</td></tr>`;
+        for (let i = minRange.value; i <= maxRange.value; i++) {
+          let num = i;
+          if (num % 2 != 0) {
+            table.innerHTML += `<tr><td>${counter}</td><td>${num}</td></tr>`;
+            counter++;
+          }
+        }
+      }
+      function funPrime() {
+        let counter = 1;
+        table.innerHTML = `<tr><td colspan=2>List of prime nos form ${minRange.value}(inclusive) to ${maxRange.value}(inclusive)</td></tr>`;
+        table.innerHTML += `<tr><td>Serial No</td><td>Prime Nums</td></tr>`;
+        for (let i = minRange.value; i <= maxRange.value; i++) {
+          //     console.log(minRange);
+          //   console.log(maxRange);
+          let num = i;
+          for (let j = 2; j <= num; j++) {
+            if (num % j == 0) {
+              if (num == j) {
+                table.innerHTML += `<tr><td>${counter}</td><td>${num}</td></tr>`;
+                counter++;
+              } else {
+                break;
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

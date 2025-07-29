@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM Navigator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+
+    #main-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    #dom-tree, #content {
+      flex: 1 1 300px;
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+
+    #controller, #addPanelBtn, #addElement {
+      flex: 1 1 100%;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.2s;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+
+    input, textarea {
+      width: 90%;
+      padding: 8px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    @keyframes flash {
+      0% { background-color: yellow; }
+      100% { background-color: lightgreen; }
+    }
+
+    .flash {
+      animation: flash 0.3s ease-in-out;
+    }
+
+    #elementPreview {
+      background: #f1f1f1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      max-width: 90%;
+      margin: auto;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h2>DOM Element Navigator</h2>
+  <div id="main-container">
+    <div id="dom-tree">
+      <p>This is p1</p>
+      <div id="div1">
+        This is div1
+        <p>This is p2</p>
+        <p>This is p3</p>
+        <p>This is p4</p>
+      </div>
+      <p>This is p5</p>
+    </div>
+
+    <div id="content">
+      <label><strong>Current Element:</strong></label>
+      <input type="text" id="txtCurElm" readonly />
+      <label><strong>Content of Current Element:</strong></label>
+      <textarea id="txtContent" readonly></textarea>
+    </div>
+
+    <div id="controller">
+      <button value="pe">Parent Element</button>
+      <button value="pes">Previous Sibling</button>
+      <button value="nes">Next Sibling</button>
+      <button value="fec">First Child</button>
+      <button value="lec">Last Child</button>
+      <button value="re">Remove Element</button>
+    </div>
+
+    <div id="addPanelBtn">
+      <button id="toggleAddPanel">➕ Add Element</button>
+    </div>
+
+    <div id="addElement" style="display: none;">
+      <h3>Add New Element</h3>
+      <input type="text" id="elementName" placeholder="Element name (e.g., div)" />
+      <textarea id="elementAttributes" placeholder="attribute1:value1,attribute2:value2"></textarea>
+      <textarea id="elementContent" placeholder="Element inner text / HTML"></textarea>
+      <br />
+      <button value="insertBefore">Insert Before</button>
+      <button value="appendChild">Append Child</button>
+
+      <h4 style="margin-top: 20px;">Current Element Preview:</h4>
+      <pre id="elementPreview"></pre>
+    </div>
+  </div>
+
+  <script>
+    let currentElement = document.getElementById("div1");
+    let btns = document.querySelectorAll("#controller button");
+    currentElement.style.backgroundColor = "lightgreen";
+
+    document.getElementById("controller").addEventListener("click", function (event) {
+      if (event.target.tagName !== "BUTTON") return;
+      currentElement.style.backgroundColor = "transparent";
+
+      switch (event.target.value) {
+        case "pe":
+          currentElement = currentElement.parentElement;
+          break;
+        case "pes":
+          currentElement = currentElement.previousElementSibling;
+          break;
+        case "nes":
+          currentElement = currentElement.nextElementSibling;
+          break;
+        case "fec":
+          currentElement = currentElement.firstElementChild;
+          break;
+        case "lec":
+          currentElement = currentElement.lastElementChild;
+          break;
+        case "re":
+          let parent = currentElement.parentElement;
+          parent.removeChild(currentElement);
+          currentElement = parent;
+          break;
+      }
+
+      updateUI();
+    });
+
+    document.getElementById("toggleAddPanel").addEventListener("click", function () {
+      const panel = document.getElementById("addElement");
+      const preview = document.getElementById("elementPreview");
+
+      if (panel.style.display === "none") {
+        panel.style.display = "block";
+        preview.textContent = currentElement.outerHTML.trim();
+      } else {
+        panel.style.display = "none";
+      }
+    });
+
+    document.getElementById("addElement").addEventListener("click", function (event) {
+      if (event.target.tagName !== "BUTTON") return;
+
+      const tag = document.getElementById("elementName").value.trim();
+      const attrs = document.getElementById("elementAttributes").value.trim();
+      const content = document.getElementById("elementContent").value.trim();
+
+      if (!tag) {
+        alert("Element name is required!");
+        return;
+      }
+
+      const newElem = document.createElement(tag);
+      newElem.innerHTML = content;
+
+      if (attrs) {
+        const attrPairs = attrs.split(",");
+        for (let pair of attrPairs) {
+          let [key, value] = pair.split(":");
+          if (key && value) newElem.setAttribute(key.trim(), value.trim());
+        }
+      }
+
+      if (event.target.value === "insertBefore" && currentElement.parentElement) {
+        currentElement.parentElement.insertBefore(newElem, currentElement);
+        currentElement = newElem;
+      }
+
+      if (event.target.value === "appendChild") {
+        currentElement.appendChild(newElem);
+        currentElement = newElem;
+      }
+
+      updateUI();
+    });
+
+    function updateUI() {
+      toggleDisable(currentElement.parentElement, btns[0]);
+      toggleDisable(currentElement.previousElementSibling, btns[1]);
+      toggleDisable(currentElement.nextElementSibling, btns[2]);
+      toggleDisable(currentElement.firstElementChild, btns[3]);
+      toggleDisable(currentElement.lastElementChild, btns[4]);
+
+      currentElement.style.backgroundColor = "lightgreen";
+      currentElement.classList.add("flash");
+      setTimeout(() => currentElement.classList.remove("flash"), 300);
+
+      currentElement.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      document.getElementById("txtCurElm").value = currentElement.nodeName;
+      document.getElementById("txtContent").value = currentElement.innerHTML.trim();
+
+      const preview = document.getElementById("elementPreview");
+      if (preview) {
+        preview.textContent = currentElement.outerHTML.trim();
+      }
+    }
+
+    function toggleDisable(node, btn) {
+      btn.disabled = !node;
+    }
+  </script>
+</body>
+</html>

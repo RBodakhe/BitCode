@@ -1,0 +1,203 @@
+<!-- Transition Property -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            height: 100px;
+            width: 100px;
+            background-color: #f0f;
+            margin: 50px;
+            transition: width 4s linear 3s;
+        }
+        div:hover{
+            width: 300px;
+            height: 50px;
+        }
+        #easeIn{
+            transition-timing-function: ease;
+        }
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+    <div id="easeIn">
+
+    </div>
+    
+</body>
+</html> -->
+
+<!-- Transform property  -->
+
+<!-- <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        height: 100px;
+        width: 100px;
+        background-color: #f0f;
+        margin: 50px;
+        position: absolute;
+
+        /* margin: 50px; */
+        /* transition: width 4s linear 3s; */
+        /* transform: translate(24px,50px);
+            transform: scale(2,0.5);
+            transform: rotate(45deg);
+            transform: skew(45deg); */
+        /* transform: translate(24px,50px) scale(4,0.5)  rotate(45deg) skew(45deg); */
+
+        /* animation of css 3 */
+
+        /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+        animation: demo 5s ease-in-out 2s infinite alternate both;
+      }
+      @keyframes demo {
+        0% {
+          background-color: black;
+          border-radius: 10%;
+          box-shadow: 5px 5px 5px white, -5px -5px 5px white;
+          top: 0;
+          left: 0;
+        }
+        20% {
+          background-color: red;
+          border-radius: 20%;
+          box-shadow: 5px 5px 5px black, -5px -5px 5px black;
+          top: 0;
+          right: 0;
+        }
+        40% {
+          background-color: green;
+          border-radius: 30%;
+          box-shadow: 5px 5px 5px red, -5px -5px 5px red;
+          bottom: 0;
+          right: 0;
+        }
+        60% {
+          background-color: blue;
+          border-radius: 40%;
+          box-shadow: 5px 5px 5px green, -5px -5px 5px green;
+          bottom: 0;
+          left: 0;
+        }
+        100% {
+          background-color: white;
+          border-radius: 50%;
+          box-shadow: 5px 5px 5px blue, -5px -5px 5px blue;
+          top: 0;
+          left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </body>
+</html> -->
+
+<!-- Psuedo Classes -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table tr:nth-child(2n) {
+        background-color: orange;
+      }
+      table tr:nth-child(odd) {
+        background-color: orangered;
+      }
+      table tr:first-of-type th {
+        background-color: #fff;
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+
+      /* attribute selecctor */
+
+      /* img[src] with attribute src */
+      /* img[src = "value"] with attribute src=value */
+      /* img[attribute ^= '1'] starting with */
+      /* img[src $= '1'] ending with */
+      /* img[src *= "3"] any where */
+      img[alt *= '1'] {
+        border: 5px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="img14.jpg" alt="1231" />
+    <img src="img6.jpg" alt="213" />
+    <table border="1" style="width: 50%">
+      <tr>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+    </table>
+  </body>
+</html>

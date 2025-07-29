@@ -1,0 +1,86 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="#">
+      <input type="text" placeholder="name" id="txt1" required/>
+      <input type="submit" value="add" onclick="funAdd()" />
+     <input type="button" value="add" onclick="sortArr()" />
+    </form>
+    <table>
+      <tr>
+       <th>Sr. no.</th>
+        <th>Name</th>
+      </tr>
+      <tbody id="tdata"></tbody>
+    </table>
+    <script>
+      let arrName = [];
+      function funAdd() {
+        arrName.push(document.getElementById("txt1").value);
+        document.getElementById("txt1").value="";
+        show();
+      }
+      function show() {
+        let str = "";
+        arrName.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+        for (let i = 0; i < arrName.length; i++) {
+          str += `<tr>
+            <td> ${arrName[i]} </td>
+                    </tr>`;
+        }
+        document.getElementById("tdata").innerHTML = str;
+
+      }
+    </script>
+  </body>
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Letter Styling</title>
+  <style>
+    #owner {
+      text-decoration: underline; /* Underline the entire text */
+    }
+
+    #owner::first-letter {
+      text-decoration: line-through; /* Remove underline from the first letter */
+      font-weight: bolder;    /* Make the first letter bold */
+      color: red;             /* Make the first letter red */
+    }
+  </style>
+</head>
+<body>
+  <p id="owner">Rameshwar</p>
+</body>
+</html>
+
+ -->
+
+ <!-- class concept in javascript -->
+  <script>
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    display() {
+      console.log(`Name: ${this.name}, Age: ${this.age}`);
+      console.log(`Type of person: ${typeof this}`);
+    }
+  }1
+
+  const person1 = new Person("Snehal", 25);
+  person1.display();  
+  </script>
+
+  

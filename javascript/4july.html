@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- case 1 -->
+    <input type="button" id="btn1" value="click" />
+    <!-- case 2 -->
+    <ul id="ul1">
+      <li>black</li>
+      <li>red</li>
+      <li>green</li>
+      <li>blue</li>
+      <li>white</li>
+    </ul>
+
+    <!-- case 3 -->
+    <ul id="ul2">
+      <li id="li1">background color</li>
+      <li id="li2">font color</li>
+      <li id="li3">font size</li>
+    </ul>
+
+    <!-- case 4 -->
+    <div id="d1">Hello</div>
+    <div id="d2">Hiii</div>
+
+    <!-- case 5 -->
+     <a href="#" id="a1">click here</a>
+    <script>
+      // case 1
+      let btn1 = document.getElementById("btn1");
+      btn1.addEventListener("click", funEvent);
+      btn1.addEventListener("mouseover", funEvent);
+      btn1.addEventListener("mouseout", funEvent);
+
+      function funEvent(event) {
+        console.log(event);
+        if (event.type == "click") {
+          console.log("button clicked");
+        } else if (event.type == "mouseover") {
+          btn1.style.backgroundColor = "lightgreen";
+        } else if (event.type == "mouseout") {
+          btn1.style.backgroundColor = "lightblue";
+        } else {
+          console.log(event.type);
+        }
+      }
+
+      //   case 2
+
+      let ul = document.getElementById("ul1");
+      ul.addEventListener("click", funClick);
+      function funClick(event) {
+        console.log(event.target);
+        console.log(event.currentTarget);
+        console.log(event.target.textContent);
+        document.bgColor = event.target.textContent;
+        // document.body.style.backgroundColor = event.target.textContent;
+      }
+
+      //   case 3
+
+      let ul2 = document.getElementById("ul2");
+      ul2.addEventListener("click", funClick2);
+      function funClick2(event) {
+        // get id of targeted element
+        let id = event.target.id;
+        console.log(id);
+
+        switch (id) {
+          case "li1":
+            ul2.style.backgroundColor = "red";
+            break;
+          case "li2":
+            ul2.style.color = "purple";
+            break;
+          case "li3":
+            ul2.style.fontSize = "50px";
+            break;
+
+          default:
+            break;
+        }
+      }
+      //   case 4
+      document.getElementById("d1").addEventListener("click", funClick3);
+      document.getElementById("d2").addEventListener("click", funClick3);
+
+      function funClick3(event) {
+        alert(event.currentTarget.textContent);
+      }
+
+    //   case 5
+    let anchor = document.getElementById("a1");
+    anchor.addEventListener("click",funAnchor);
+
+    function funAnchor(event){
+        console.log(event.defaultPrevented);//f
+        event.preventDefault();
+        console.log(event.defaultPrevented);//t
+
+        console.log("hyperlinks");
+    }
+    </script>
+  </body>
+</html>

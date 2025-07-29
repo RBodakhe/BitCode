@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!--
+        <style>
+            div{
+            width: 200px;
+            height: 200px;
+            /* border: 2px solid black; */
+            /* apply border image */
+            border-width: 20px;
+            border-style: solid;
+            background-clip: content-box;
+            background-color: yellow;
+            /* border-image: url("img14.jpg") 50 round; */
+            /* border-image: url("img14.jpg") 30 stretch; */
+            border-image: url("https://png.pngtree.com/png-clipart/20220628/ourmid/pngtree-border-black-simple-and-minimalist-png-image_5329503.png") 50 stretch;
+        }
+    </style>
+    -->
+    <!-- <style>
+        div img{
+            height: 300px;
+            width: 300px;
+            position: relative;
+        }
+        p{
+            height: 100px;
+            height: 100px;
+            position: absolute;
+            left: 50px;
+            top:  50px;
+        }
+    </style> -->
+    <style>
+      div {
+        width: 80%;
+        height: auto;
+        /* display: none; */
+        /* visibility: hidden; */
+        /* display: none; vs visibility:hidden; */
+        /* display: none; will not take up space in the layout */
+        /* visibility: hidden; will take up space in the layout */
+        border: 2px solid blue;
+
+        font-size: 10px;
+        font-weight: bolder;
+        text-align: center;
+        color: transparent;
+
+        background-image: url("https://cdn-imgix.headout.com/tour/7064/TOUR-IMAGE/b2c74200-8da7-439a-95b6-9cad1aa18742-4445-dubai-img-worlds-of-adventure-tickets-02.jpeg?auto=format&w=900&h=562.5&q=90&ar=16%3A10&crop=faces%2Ccenter&fit=crop");
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        /* -webkit-background-clip: text; /* for chorme, edge, safari*/
+        /* -moz-background-clip: text; for mozilla firefox */
+        background-clip: text;
+      }
+
+      /*pseudo elements*/
+      p::before {
+        content: open-quote;
+      }
+      p::after {
+        content: close-quote;
+      }
+      span {
+        font-size: 100px;
+        color: #000;
+      }
+      p:first-line {
+        text-decoration: underline;
+      }
+
+      .dis {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        display: inline-block;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div>
+        <img src="img14.jpg" alt="">
+        <p>Hello</p>
+    </div> -->
+
+    <div>
+      <span>B</span>itCode Technologies
+      <p>
+        Lorem ipsum dolor, s it amet consectetur adipisicing <br />
+        elit. Impedit magnam suscipit ex libero fugit sint voluptate ratione
+        expedita voluptatem qui delectus, nostrum consequuntur minima labore,
+        maiores ad nulla consectetur blanditiis.
+      </p>
+    </div>
+    <div class="dis"></div>
+    <div class="dis"></div>
+  </body>
+</html>

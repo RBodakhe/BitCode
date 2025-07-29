@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Built-in Objects and Array Methods</title>
+  </head>
+  <body>
+    <ol id="colorList"></ol>
+
+    <script>
+      // 🔹 Built-in JavaScript Objects
+      /*
+        1. Array
+        2. String
+        3. Date
+        4. Math
+        5. Global
+      */
+
+      // ✅ Array Example
+      var colorList = document.getElementById("colorList");
+      var colors = new Array("red", "green", "blue", "white", "black");
+
+      // Display colors as <li> elements (commented block)
+      /*
+      var str = "";
+      for (let i = 0; i < colors.length; i++) {
+        str += "<li style='color:" + colors[i] + "'>" + colors[i] + "</li>";
+      }
+      colorList.innerHTML = str;
+      */
+
+      // 🔸 Array Properties and Methods
+
+      // 1️⃣ .length — returns the total number of elements in the array
+      console.log(".length", colors.length);
+      
+
+      // 2️⃣ .toString() — converts array to comma-separated string
+      console.log("arr.toString()", colors.toString());
+
+      // 3️⃣ .join(separator) — joins array elements using the given separator
+      console.log("arr.join('/')", colors.join("/"));
+
+      // 4️⃣ .reverse() — reverses the array (also mutates the original)
+      // console.log("arr.reverse()", colors.reverse());
+
+      // 5️⃣ .sort() — sorts array alphabetically (also mutates original)
+      // console.log("arr.sort()", colors.sort());
+
+      // 6️⃣ .slice(start, end) — returns a new array from start to end (excluding end)
+      console.log("arr.slice(2,4)", colors.slice(2, 4));
+
+      // 7️⃣ .splice(index, deleteCount, ...items) — removes and/or adds elements at given index
+      // Example: colors.splice(2, 1, "purple") — removes 1 item at index 2 and adds "purple"
+
+      // 🔁 Stack operations (LIFO)
+      // .push(element) — adds to end
+      // .pop() — removes from end
+
+      // 🔁 Queue operations (FIFO)
+      // .unshift(element) — adds to beginning
+      // .shift() — removes from beginning
+
+      // 🔸 Sorting Numeric Array
+      var arr = [10, 100, 20, 40, 1, 2];
+      console.log("Original array", arr);
+
+      // ⚠️ Note: arr.sort() alone sorts as strings, not numerically
+      /*
+      arr.sort(function(a, b) {
+        return a - b; // ascending
+      });
+
+      arr.sort(function(a, b) {
+        return b - a; // descending
+      });
+      */
+
+      // ✅ Manual sorting using nested loop (Descending order)
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i; j < arr.length; j++) {
+          if (arr[i] < arr[j]) { // Use > for ascending, < for descending
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+          }
+        }
+      }
+
+      console.log("Sorted array (Descending)", arr);
+    </script>
+  </body>
+</html>

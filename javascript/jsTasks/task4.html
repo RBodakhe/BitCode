@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #outer {
+        height: 100vh;
+        width: 100vw;
+        display: flex; /* 👈 Flex layout */
+        background-color: transparent;
+        padding: 100px;
+        gap: 50px; /* space between left and right columns */
+        transition: background-color 0.5s ease;
+      }
+
+      #left {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .div1 {
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+      }
+
+      textarea {
+        width: 400px;
+        height: 100px;
+        font-size: 16px;
+      }
+
+      #output {
+        font-family: Arial, sans-serif;
+      }
+
+      table {
+        width: 300px;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Task 1 & 2 Combined Layout -->
+    <div id="outer">
+      <!-- Left Column -->
+      <div id="left">
+        <div class="div1" style="background-color: lightcoral"></div>
+        <div class="div1" style="background-color: rgb(212, 212, 21)"></div>
+        <textarea
+          id="txtStr"
+          placeholder="Enter your string here..."
+        ></textarea>
+      </div>
+
+      <!-- Right Column - Output Table -->
+      <div id="output" style="width: 50%; height: 400px; overflow: auto">
+        <h3>Character Frequency Table</h3>
+        <table id="freqTable">
+          <thead>
+            <tr>
+              <th>Character</th>
+              <th>Frequency</th>
+            </tr>
+          </thead>
+          <tbody id="freqTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Task 1 - Background color change
+      const outerDiv = document.getElementById("outer");
+      outerDiv.addEventListener("mouseover", changeBgColor);
+
+      function changeBgColor(event) {
+        if (event.target.id === "outer") {
+          outerDiv.style.backgroundColor = "transparent";
+        } else {
+          outerDiv.style.backgroundColor = event.target.style.backgroundColor;
+        }
+      }
+
+      // Task 2 - Frequency Table
+      const txtStr = document.getElementById("txtStr");
+      const freqTableBody = document.getElementById("freqTableBody");
+
+      txtStr.addEventListener("change", countCharFrequency);
+
+      function countCharFrequency() {
+        const str = txtStr.value;
+        const uniqueCharArray = [];
+        const freqCount = [];
+
+        // Extract unique characters (excluding spaces)
+        for (let i = 0; i < str.length; i++) {
+          const char = str[i];
+          if (char !== " " && uniqueCharArray.indexOf(char) === -1) {
+            uniqueCharArray.push(char);
+          }
+        }
+        uniqueCharArray.sort();
+        // Count frequency for each unique character
+        for (let i = 0; i < uniqueCharArray.length; i++) {
+          const char = uniqueCharArray[i];
+          let count = 0;
+          for (let j = 0; j < str.length; j++) {
+            if (str[j] === char) {
+              count++;
+            }
+          }
+          freqCount[i] = count;
+        }
+
+        // Display in table format
+        freqTableBody.innerHTML = ""; // Clear old rows
+        for (let i = 0; i < uniqueCharArray.length; i++) {
+          const row = `<tr>
+              <td>${uniqueCharArray[i]}</td>
+              <td>${freqCount[i]}</td>
+            </tr>`;
+          freqTableBody.innerHTML += row;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        input,label{
+            font-size: 25px;
+        }
+      div {
+        display: inline-block;
+      }
+      #box {
+        width: 300px;
+
+        height: 300px;
+        background-color: blueviolet;
+        border: 15px dashed red;
+        padding: 50px;
+        margin: 50px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div id="box">Hi i am box</div>
+    <div id="radioGroup">
+      <input
+        type="radio"
+        value="border-box"
+        name="background-clip"
+        id="rbtn1"
+        checked
+      />
+      <label for="rbtn1"> border-box</label>
+      <br />
+
+      <input
+        type="radio"
+        value="content-box"
+        name="background-clip"
+        id="rbtn2"
+      />
+      <label for="rbtn2"> content-box</label>
+      <br />
+
+      <input
+        type="radio"
+        value="padding-box"
+        name="background-clip"
+        id="rbtn3"
+      />
+      <label for="rbtn3"> padding-box</label>
+    </div>
+    <script>
+      $(document).ready(() => {
+        $("#radioGroup").click(function (e) {
+          if (e.target.nodeName === "INPUT") {
+            console.log(e.target.value, e.target.name);
+            $("#box").css(e.target.name, e.target.value);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

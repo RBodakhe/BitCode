@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Name: <input type="text" id="txtName" /> Marks:
+    <input type="number" id="txtMarks" /><br />
+    <input type="button" value="insert" onclick="insertRecord()" />
+    <table border="1" style="width: 50%; border-collapse: collapse">
+      <thead>
+        <th>#</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Marks</th>
+      </thead>
+      <tbody id="data"></tbody>
+    </table>
+    <!-- <script>
+      let txtName = document.getElementById("txtName");
+      let txtMarks = document.getElementById("txtMarks");
+      let tbody = document.getElementById("data");
+      let studs = [];
+      let couter = 1;
+      function Student(sname, smarks) {
+        this.id = couter;
+        couter++;
+        this.name = sname;
+        this.marks = smarks;
+      }
+      function insertRecord() {
+        let name = txtName.value;
+        let marks = txtMarks.value;
+        if (name == "" || marks == "") {
+          return;
+        } else {
+          let stud = new Student(name, marks);
+          studs.push(stud);
+          //   studs.sort((a, b) => {
+          //     if (a.name > b.name) {
+          //       let temp = a;
+          //       a = b;
+          //       b = temp;
+          //     }
+          //   });
+          sort();
+          display();
+        }
+        txtName.value = "";
+        txtMarks.value = "";
+      }
+      function sort() {
+        for (let i = 0; i < studs.length; i++) {
+          for (let j = i + 1; j < studs.length; j++) {
+            //   if (studs[i].name > studs[j].name) {
+            //     let temp = studs[i];
+            //     studs[i] = studs[j];
+            //     studs[j] = temp;
+            //   }
+            if (studs[i].name.localeCompare(studs[j].name) == 1) {
+              //-1 for descending
+              let temp = studs[i];
+              studs[i] = studs[j];
+              studs[j] = temp;
+            }
+          }
+        }
+      }
+
+      function display() {
+        let str = "";
+        for (let i = 0; i < studs.length; i++) {
+          str += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${studs[i].id}</td>
+                <td>${studs[i].name}</td>
+                <td>${studs[i].marks}</td>
+               
+                </tr>
+            `;
+        }
+        tbody.innerHTML = str;
+      }
+    </script> -->
+
+    <script>
+      let str = "hi there this is javascript program";
+      let uChars = [];
+      for (let i = 0; i < str.length; i++) {
+        if (uChars.indexOf(str[i] == -1)) {
+          uChars.push(str[i]);
+        }
+      }
+      console.log("string", str);
+      console.log("unique characters", uChars.toString());
+      let obj = {};
+      for (let i = 0; i < uChars.length; i++) {
+        let count = 0;
+        for (let j = 0; j < str.length; j++) {
+          if (uChars[i] == str[j]) {
+            count++;
+          }
+        }
+        obj[uChars[i]] = count;
+      }
+      console.log(obj);
+
+      for (const key in obj) {
+        document.writeln("<br />" + key + " " + obj[key]);
+      }
+    </script>
+
+    <script>
+      let num = 4328;
+      let temp = num;
+      let digitArr = [];
+      while (temp > 0) {
+        digitArr.push(temp % 10);
+        temp = parseInt(temp / 10);
+      }
+
+      console.log("original ", digitArr);
+      for (let i = 0; i < digitArr.length; i++) {
+        for (let j = i+1; j < digitArr.length; j++) {
+            if (digitArr[i]<digitArr[j]) {
+                digitArr[i],digitArr[j]=digitArr[j],digitArr[i]
+            }
+        }
+      }
+      console.log("sorted ", digitArr);
+      console.log(typeof digitArr[0]);
+    </script>
+  </body>
+</html>

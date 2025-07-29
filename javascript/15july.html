@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closures and JSON Example</title>
+  </head>
+  <body>
+    <h3>Closure + Self-Invoking + Anonymous Function</h3>
+
+    <!-- Button to test closure function -->
+    <input type="button" value="Click Me" onclick="x()" />
+    <div id="myDiv"></div>
+
+    <script>
+      let div = document.getElementById("myDiv");
+
+      /**
+       * Closure:
+       * A closure is a function that remembers variables from its outer scope,
+       * even after the outer function has finished executing.
+       * खालील function count variable retain करतो कारण तो closure आहे.
+       *
+       * Anonymous Function:
+       * A function without a name. Here, function () { ... } is anonymous.
+       *
+       * Self-Invoking Function (IIFE):
+       * Function that runs immediately after it's defined.
+       * Format: (function() { ... })();
+       */
+
+      let x = (function () {
+        let count = 0; // This count is preserved due to closure
+
+        // returned function has access to count even after outer function finishes
+        return function () {
+          count++;
+          div.innerHTML = "Click Count: " + count + "<br/>";
+        };
+      })(); // Self-invoking function runs immediately and returns inner function
+
+      // Function calling a self-invoking + anonymous function
+      function fullName(fname, lname) {
+        let str = "My name is ";
+
+        (function () {
+          // anonymous + closure + IIFE
+          div.innerHTML += str + fname + " " + lname + "<br/>";
+        })(); // Self-invoking
+      }
+
+      fullName("Rameshwar", "Bodakhe");
+    </script>
+
+    <hr />
+
+    <h3>JSON Example</h3>
+
+    <script>
+      /**
+       * JSON (JavaScript Object Notation):
+       * - Lightweight data-interchange format
+       * - Used to send/receive data from server (mostly in API)
+       * - Only supports string, number, array, object, boolean, null
+       *
+       * stringify() - JS → JSON
+       * parse()     - JSON → JS
+       */
+
+      // JavaScript Array → JSON String
+      let arr = ["red", "green", "blue", "black", "white"];
+      console.log("JS Array:", arr);               // ["red", "green", ...]
+      console.log("Type:", typeof arr);            // object
+
+      let jsonStr = JSON.stringify(arr);           // converts array to JSON string
+      console.log("JSON String:", jsonStr);        // '["red","green",...]'
+      console.log("Type:", typeof jsonStr);        // string
+
+      // JavaScript Object Array → JSON String
+      let products = [
+        { prodName: "marker", prodPrice: 100 },
+        { prodName: "pen", prodPrice: 10 },
+        { prodName: "book", prodPrice: 50 },
+        { prodName: "color", prodPrice: 150 },
+      ];
+
+      console.log("JS Object Array:", products);           // array of objects
+      console.log("Type:", typeof products);               // object
+
+      jsonStr = JSON.stringify(products);                  // object → JSON string
+      console.log("JSON String:", jsonStr);                // string format
+      console.log("Type:", typeof jsonStr);                // string
+
+      // JSON String → JavaScript Object
+      let parsedObj = JSON.parse(jsonStr);                 // parse back to JS object
+      console.log("Parsed JS Object:", parsedObj);         // back to object array
+      console.log("Type:", typeof parsedObj);              // object
+    </script>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Array Utilities</title>
+</head>
+<body>
+
+  <!-- 1. Search City UI -->
+  <div>
+    <input type="text" id="txtCity" placeholder="Enter city name" />
+    <input type="button" value="Find" onclick="isPresent()" />
+    <p id="result"></p>
+  </div>
+
+  <!-- 2. Table of Cities -->
+  <div id="cityTable"></div>
+
+  <!-- 3. Output for duplicate removal and min/max -->
+  <div id="output"></div>
+
+  <script>
+    const txtCity = document.getElementById("txtCity");
+    const result = document.getElementById("result");
+    const output = document.getElementById("output");
+
+    const capitalCities = [
+      "Mumbai", "Bengaluru", "Hyderabad", "Amravati", 
+      "Chennai", "Panaji", "Thiruvananthapuram"
+    ];
+
+    /**
+     * Searches for a city in the capitalCities array (case-insensitive).
+     * @param {string} city - The city name to search.
+     * @returns {number} Index of the city if found, else -1.
+     */
+    function searchCity(city) {
+      const cityLower = city.toLowerCase();
+      for (let i = 0; i < capitalCities.length; i++) {
+        if (capitalCities[i].toLowerCase() === cityLower) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    /**
+     * Displays search result for a city.
+     */
+    function isPresent() {
+      const city = txtCity.value.trim();
+      const ind = searchCity(city);
+      if (ind === -1) {
+        result.style.color = "red";
+        result.textContent = `${city} is not found in the array.`;
+      } else {
+        result.style.color = "green";
+        result.textContent = `${city} is present at index ${ind} in the array.`;
+      }
+    }
+
+    /**
+     * Displays an array of cities in a formatted HTML table.
+     * @param {string[]} arr - Array of cities.
+     * @returns {string} - HTML table string.
+     */
+    function displayAsTable(arr) {
+      let table = "<table border='1' cellpadding='5'><tr><th>Index</th><th>City</th></tr>";
+      arr.forEach((city, i) => {
+        table += `<tr><td>${i}</td><td>${city}</td></tr>`;
+      });
+      table += "</table>";
+      return table;
+    }
+
+    document.getElementById("cityTable").innerHTML = displayAsTable(capitalCities);
+
+    /**
+     * Removes duplicate numbers from an array.
+     * @param {number[]} nums - The array with duplicates.
+     * @returns {number[]} - New array without duplicates.
+     */
+    function removeDuplicates(nums) {
+      for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+          if (nums[i] === nums[j]) {
+            nums.splice(j, 1);
+            j--;
+          }
+        }
+      }
+      return nums;
+    }
+
+    /**
+     * Returns the largest number from an array.
+     * @param {number[]} nums - Array of numbers.
+     * @returns {number} - Largest number.
+     */
+    function getLargestNum(nums = []) {
+      if (nums.length === 0) throw new Error("Array is empty");
+      return nums.reduce((max, n) => (n > max ? n : max));
+    }
+
+    /**
+     * Returns the smallest number from an array.
+     * @param {number[]} nums - Array of numbers.
+     * @returns {number} - Smallest number.
+     */
+    function getSmallestNum(nums = []) {
+      if (nums.length === 0) throw new Error("Array is empty");
+      return nums.reduce((min, n) => (n < min ? n : min));
+    }
+
+    /**
+     * Returns the second largest number from an array.
+     * @param {number[]} nums - Array of numbers.
+     * @returns {number} - Second largest number.
+     */
+    function getSecondLargestNum(nums = []) {
+      if (nums.length < 2) throw new Error("At least two elements required");
+      let largest = -Infinity;
+      let second = -Infinity;
+      for (const num of nums) {
+        if (num > largest) {
+          second = largest;
+          largest = num;
+        } else if (num > second && num < largest) {
+          second = num;
+        }
+      }
+      if (second === -Infinity) throw new Error("No distinct second largest number");
+      return second;
+    }
+
+    /**
+     * Returns the second smallest number from an array.
+     * @param {number[]} nums - Array of numbers.
+     * @returns {number} - Second smallest number.
+     */
+    function getSecondSmallestNum(nums = []) {
+      if (nums.length < 2) throw new Error("At least two elements required");
+      let smallest = Infinity;
+      let second = Infinity;
+      for (const num of nums) {
+        if (num < smallest) {
+          second = smallest;
+          smallest = num;
+        } else if (num < second && num > smallest) {
+          second = num;
+        }
+      }
+      if (second === Infinity) throw new Error("No distinct second smallest number");
+      return second;
+    }
+
+    // Example array for number functions
+    const nums = [1, 2, 2, 3, 5, 7, 4, 3, 1, 2, 5, 3, 7, 9, 0, 0, 2];
+    const original = [...nums];
+    const unique = removeDuplicates([...nums]);
+
+    // Output all number function results
+    output.innerHTML = `
+      <h3>Original Array:</h3> ${original.join(", ")}<br>
+      <h3>Without Duplicates:</h3> ${unique.join(", ")}<br>
+      <h3>Largest:</h3> ${getLargestNum(unique)}<br>
+      <h3>Smallest:</h3> ${getSmallestNum(unique)}<br>
+      <h3>Second Largest:</h3> ${getSecondLargestNum(unique)}<br>
+      <h3>Second Smallest:</h3> ${getSecondSmallestNum(unique)}<br>
+    `;
+  </script>
+</body>
+</html>

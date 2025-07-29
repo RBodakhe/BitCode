@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Learning Playground</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      #div1 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- DOM Structure -->
+    <div class="grandparent" id="grandparent">
+      <div class="parent">
+        <div class="child">
+          <span class="subchild">Hello</span>
+        </div>
+      </div>
+      <div class="parent1">Parent 1</div>
+      <div class="parent2">Parent 2</div>
+    </div>
+
+    <!-- List for utility method examples -->
+    <ul>
+      <li>red</li>
+      <li>blue</li>
+      <li>green</li>
+    </ul>
+
+    <!-- Buttons for event handling -->
+    <button id="btn1">Click</button>
+    <button id="btn2">Click Once</button>
+    <button id="btn3">Remove Handler</button>
+
+    <!-- Clickable div -->
+    <div id="div1"></div>
+
+    <!-- jQuery Scripts -->
+    <script>
+      $(document).ready(() => {
+        // ========================
+        // SECTION 1: jQuery vs JavaScript objects
+        // ========================
+        let domElement = document.getElementById("grandparent");
+        let jqElement = $("#grandparent");
+
+        // Convert JavaScript object to jQuery object
+        $(domElement).html("Updated with jQuery");
+
+        // Convert jQuery object to JavaScript object
+        let domAgain = jqElement.get(0);
+        domAgain.innerHTML = "Updated with JavaScript";
+
+        // Object comparisons
+        console.log("JS object comparison:");
+        console.log(domElement == domAgain); // true
+        console.log(domElement === domAgain); // true
+
+        console.log("jQuery object comparison:");
+        let jq1 = $("#grandparent");
+        let jq2 = $("#grandparent");
+        console.log(jq1 == jq2); // false
+        console.log(jq1 === jq2); // false
+
+        // ========================
+        // SECTION 2: DOM Traversal
+        // ========================
+        let parentOfSpan = $("span.subchild").parent();
+        console.log("Parent of span.subchild:", parentOfSpan);
+
+        // ========================
+        // SECTION 3: jQuery Utility Methods
+        // ========================
+
+        // $.each for arrays
+        let colors = ["red", "green", "blue", "black", "white"];
+        $.each(colors, (index, value) => {
+          console.log("Array index:", index, "Value:", value);
+        });
+
+        // $.each for objects
+        let person = {
+          name: "Ram",
+          mobileNo: 909090,
+          age: 23,
+        };
+        $.each(person, (key, value) => {
+          console.log("Object key:", key, "Value:", value);
+        });
+
+        // .each() for jQuery DOM traversal
+        $("ul li").each(function () {
+          // Set text color based on item text
+          $(this).css("color", $(this).text());
+        });
+
+        // $.inArray
+        console.log("Index of 1.2:", $.inArray(1.2, [1.2, 4, 5, 6])); // 0
+
+        // ========================
+        // SECTION 4: Event Handling
+        // ========================
+
+        // Function definitions
+        function fun(e) {
+          if (e.type == "click") {
+            console.log("Click event triggered");
+            $(this).css("color", "red");
+          } else if (e.type == "mouseover") {
+            console.log("Mouseover event triggered");
+          } else if (e.type == "mouseout") {
+            console.log("Mouseout event triggered");
+          }
+        }
+
+        function fun1() {
+          console.log("Mouseover (fun1) triggered");
+        }
+
+        // Add multiple events to #btn1
+        $("#btn1").on({
+          click: fun,
+          mouseover: fun1,
+          mouseout: fun,
+        });
+
+        // One-time event handler for #btn2
+        $("#btn2").one("click mouseover mouseout contextmenu", (e) => {
+          e.preventDefault(); // prevents context menu
+          console.log("Triggered once:", e.type);
+        });
+
+        // Remove click handler from #btn1
+        $("#btn3").on("click", () => {
+          $("#btn1").off("click", fun);
+          console.log("Click handler removed from btn1");
+        });
+
+        // Log mouse position on #div1 click
+        $("#div1").click((e) => {
+          console.log("Mouse clicked at:", e.clientX, e.clientY);
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* up header */
+#upheader,
+#header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+  background-color: #c31212;
+}
+#upheader a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  margin: 0.5% 1%;
+}
+/* header/nav bar */
+#header {
+  justify-content: space-between;
+  background-color: white;
+  margin: 1% 0;
+}
+#logo {
+  justify-content: end;
+}
+#logo img {
+  margin-left: 40%;
+  width: 50%;
+  height: auto;
+}
+
+#header #logo,
+#login {
+  display: inline-block;
+  width: 20%;
+}
+#nav {
+  width: 60%;
+}
+#links {
+  /* background-color: #c31212; */
+  display: flex;
+  width: 100%;
+  padding-top: 3%;
+  list-style: none;
+  justify-content: space-around;
+}
+#links li {
+  display: inline-flex;
+}
+#links a {
+  /* display: ; */
+  text-decoration: none;
+  color: black;
+  transition: 0.1s ease-in-out;
+}
+#links a:hover,
+.active {
+  border-bottom: 2px solid #c31212;
+}
+#login {
+  padding: 1% 0 0 5%;
+}
+/* background image and text over it changeable text over it */
+#bgimg {
+  width: 100%;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://bitcode.in/assets/img/landing/conference/img/02.jpg");
+  background-repeat: repeat-x;
+  background-size: 100%;
+}
+#bgimg h1 {
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  border-radius: 50px;
+  opacity: 0.7;
+  color: #000;
+  text-align: center;
+  padding: 1% 0 0 0;
+  font-size: 5rem;
+}
+h1 span {
+  color: #c31212;
+}
+
+/* Job Oriented Courses */
+#joc {
+  display: flexbox;
+  width: 100%;
+  justify-content: space-around;
+}
+#joc h1 {
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+#joc .courses:hover {
+  transform: rotateY(-180deg);
+}
+#joc .courses {
+  width: 20%;
+  height: 200px;
+  margin: 20px;
+  display: inline-block;
+  background-color: #e6e7e5;
+  padding: 1%;
+  border-radius: 20px;
+  transition: 0.5s all ease-in-out;
+}
+#joc .courses h5 {
+  text-transform: capitalize;
+}
+#joc .courses * {
+  margin: 20px 0;
+}
+
+/* get first job */
+#gfj {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5% 10%;
+}
+#gfj #pic,
+#txt {
+  display: inline-block;
+  width: 50%;
+  justify-content: center;
+  /* box-shadow: -5px -5px 1px rgb(118, 116, 116),
+          5px 5px 1px rgb(118, 116, 116); */
+}
+#txt p {
+  margin: 0 0 0 15%;
+}
+#txt .title {
+  font-size: 3em;
+}
+#txt .para {
+  font-size: 1em;
+}
+#pic img {
+  width: 80%;
+  height: auto;
+  margin: 0 15% 0 0;
+  float: right;
+  border-radius: 50px;
+  box-shadow: -5px -5px 1px rgb(118, 116, 116), 5px 5px 1px rgb(118, 116, 116);
+}
+#impText::before {
+  content: open-quote;
+}
+#impText::after {
+  content: close-quote;
+}
+.dropdown:hover > .dropdown-menu {
+  display: block;
+  margin-left: -440px;
+  margin-top: 0px;
+}
+li.title::before {
+  content: "•"; /* Unicode character for bullet point */
+  display: inline-block; /* Make it behave like a list item */
+  width: 0.5em; /* Adjust spacing */
+  margin-top: -0.6em;
+  margin-left: -0.5em;
+  padding-right: 0.5em; /* Adjust spacing */
+  color: rgb(232, 82, 82);
+  font-size: 3em;
+}
+.dropdown-item:hover {
+  color: rgb(226, 59, 59) !important;
+  text-decoration: none !important;
+  border-bottom: none;
+}

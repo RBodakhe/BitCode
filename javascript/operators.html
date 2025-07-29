@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" placeholder="number" id="txtNum" />
+    <input type="button" value="Is Amrstrong" onclick="isAmrstrong()" />
+    <input type="button" value="Is Palindrome" onclick="isPalindrom()" />
+    <input type="button" value="sum of digits" onclick="sumOfDigits()" />
+    <input type="button" value="Is Prime" onclick="isPrime()" />
+    <div id="ans"></div>
+    <script>
+      var txtNum = document.getElementById("txtNum");
+      var ans = document.getElementById("ans");
+      function isAmrstrong() {
+        var num = txtNum.value;
+        if (txtNum.value == "") {
+          return;
+        }
+        var temp = num;
+        var arm = 0;
+        var rem = 0;
+        while (temp > 0) {
+          rem = temp % 10;//89886---6
+          arm += rem * rem * rem;//0+6*6*6
+          temp = parseInt(temp / 10);//89886---8988
+        }
+        if (num == arm) {
+          ans.innerHTML = num + " is a armstorng number ";
+          ans.style.color = "green";
+        } else {
+          ans.innerHTML = num + " is not a armstorng number ";
+          ans.style.color = "red";
+        }
+      }
+      function isPalindrom() {
+        var num = txtNum.value;
+        if (txtNum.value == "") {
+          return;
+        }
+        var temp = num;
+        var reverse = 0;
+        var rem = 0;
+        while (temp > 0) {
+          rem = temp % 10;
+          reverse = reverse * 10 + rem;
+          temp = parseInt(temp / 10);
+        }
+        if (num == reverse) {
+          ans.innerHTML = num + " is a palindrome number ";
+        } else {
+          ans.innerHTML = num + " is not a palindrome number ";
+        }
+      }
+      function sumOfDigits() {
+        if (txtNum.value == "") {
+          return;
+        }
+        var num = txtNum.value;
+        var temp = num;
+        var sum = 0;
+        var rem = 0;
+        while (temp > 0) {
+          rem = temp % 10;
+          sum += rem;
+          temp = parseInt(temp / 10);
+        }
+        ans.innerHTML = "sum of digits of " + num + "is " + sum;
+      }
+
+      function isPrime() {
+        var num = txtNum.value;
+        if (txtNum.value == "") {
+          return;
+        }
+        for (var i = 2; i <= num; i++) {
+          //   console.log("true");
+          if (num % i == 0) {
+            if (num == i) {
+              ans.innerHTML = num + " is a prime number";
+              ans.style.color = "green";
+              //   console.log("true");
+            } else {
+              ans.innerHTML = num + " is not a prime number";
+              ans.style.color = "red";
+              //   console.log("false");
+              break;
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bootstrap Starter Template" />
+    <meta name="author" content="Your Name" />
+    <title>My Bootstrap Template</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons (Correct Version) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12">
+          <button id="btnGet" class="btn btn-outline-primary">
+            Get Products
+          </button>
+        </div>
+      </div>
+      <div class="row" id="prodList"></div>
+    </div>
+
+    <script>
+      let requestObj = new XMLHttpRequest();
+      let btn = document.getElementById("btnGet");
+      let outerDiv = document.getElementById("prodList");
+
+      function displayProducts(products) {
+        for (let i = 0; i < products.length; i++) {
+          let div = document.createElement("div");
+          div.setAttribute("class", "col-4");
+          let dims = "";
+          for (const key in products[i].dimensions) {
+            dims += `<li>${key}: ${products[i].dimensions[key]}</li>`;
+          }
+          div.innerHTML = `
+          
+                <div class="card m-1 p-1" style="width: 18rem;">
+                  <img src="${
+                    products[i].thumbnail
+                  }" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <h5 class="card-title">${products[i].title}</h5>
+                      <p class="card-text">${products[i].description}</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Price:₹${Math.round(
+                        products[i].price * 85
+                      )}</li>
+                      <li class="list-group-item">dimensions:
+                          <ol>
+                             ${dims}
+                          </ol>
+                      </li>
+                      <li class="list-group-item">
+                        <a target="_blank" href="${
+                          products[i].meta.qrCode
+                        }" >QR Code</a>
+                        </li>
+                  </ul>
+                  <div class="card-body text-center">
+                      <button class="btn btn-lg btn-danger">More info</button>
+                  </div>
+              </div>
+              `;
+          outerDiv.appendChild(div);
+        }
+      }
+      btn.onclick = function () {
+        requestObj.open("get", "https://dummyjson.com/products");
+        requestObj.responseType = "json";
+        requestObj.send();
+        requestObj.onreadystatechange = function () {
+          if (requestObj.readyState == 4 && requestObj.status == 200) {
+            let responseObj = requestObj.response.products;
+            console.log(responseObj);
+            displayProducts(responseObj);
+          }
+        };
+      };
+    </script>
+
+    <!-- Bootstrap JS Bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

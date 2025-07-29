@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Age Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f8ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 400px;
+      }
+      label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      input[type="button"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input[type="button"]:hover {
+        background-color: #0056b3;
+      }
+      ol {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+    Task Two:
+Create a webpage where the user can input a number. On clicking a button, the number should be stored in an array, and the full array should be displayed in a list format (ul or ol) on the page, updating with each new entry.
+    -->
+    <div class="container">
+      <label>Enter a number:</label>
+      <input type="number" id="txtNo" />
+
+      <input type="button" value="Add Element" onclick="addElement()" />
+
+      <ol id="result" start="0"></ol>
+    </div>
+    <a href="jsTasks3.html">previous Task</a>
+
+    <script>
+      let txtNo = document.getElementById("txtNo");
+      let result = document.getElementById("result");
+      let numArr = [];
+      function addElement() {
+        let no = txtNo.value;
+        if (no == "") {
+          alert("Please enter a number");
+          return;
+        } else {
+          txtNo.value = "";
+          txtNo.focus();
+        }
+        numArr.push(no);
+        let lis = "";
+        for (let i = 0; i < numArr.length; i++) {
+          lis += "<li>" + numArr[i] + "</li>";
+        }
+        result.innerHTML = lis;
+      }
+    </script>
+  </body>
+</html>

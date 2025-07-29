@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- apply background color to body onclick of button from colors array -->
+    <input
+      type="button"
+      value="change background color"
+      onclick="changeColor()"
+    />
+    <script>
+      let colors = ["black", "red", "green", "blue", "white"];
+      let i = 0;
+      function changeColor() {
+        document.bgColor = colors[i];
+        i++;
+        if (i == colors.length) {
+          i = 0;
+        }
+      }
+    </script>
+
+    <!-- change image on click of next image button  -->
+    <img src="" alt="demoimages" id="img" />
+    <input type="button" value="next image" onclick="nextImg()" />
+    <script>
+      let img = document.getElementById("img");
+      let arrImgs = [
+        "https://static.toiimg.com/thumb/imgsize-84549,msid-107385378,width-600,height-335,resizemode-75/107385378.jpg",
+        "https://static.toiimg.com/thumb/imgsize-94373,msid-107385380,width-600,height-335,resizemode-75/107385380.jpg",
+        "https://static.toiimg.com/thumb/imgsize-158822,msid-107385381,width-600,height-335,resizemode-75/107385381.jpg",
+        "https://static.toiimg.com/thumb/imgsize-60044,msid-107385383,width-600,height-335,resizemode-75/107385383.jpg",
+      ];
+      let j = 0;
+      function nextImg() {
+        img.src = arrImgs[j];
+        j++;
+        if (j == arrImgs.length) {
+          j = 0;
+        }
+      }
+
+      let str="sgsdg";
+      console.log(str.split("s",8));
+    </script>
+  </body>
+</html>
+
+<script>
+    // reverse the string
+    var strB="bitcode";
+    
+    var strR=""
+    var n = strB.length-1;
+    for(let i = n;i>-1;i--){
+        strR+=strB[i];
+    }
+    console.log(strR);
+</script>

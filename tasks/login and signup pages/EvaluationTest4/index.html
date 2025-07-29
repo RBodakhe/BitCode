@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="main" class="container-fluid" style="background-color: rgb(192, 185, 185);">
+      <div id="form" class="container">
+        <div class="p-1 text-center row">
+          <div class="p-1 text-center col-12">
+            <h1 class="text-center">Student Record Management</h1>
+          </div>
+          <div class="p-1 text-center col-3">
+            <label>Roll No.</label><br />
+            <input type="number" id="txtRollNO" />
+          </div>
+          <div class="p-1 text-center col-3">
+            <label>Name</label><br />
+            <input type="text" id="txtName" />
+          </div>
+          <div class="p-1 text-center col-3">
+            <label>Marks [out of 100]</label>
+            <input type="number" id="txtMarks" />
+          </div>
+          <div class="p-1 text-center col-3">
+            <label>Passing Year</label>
+            <input type="number" id="txtPassYear" />
+          </div>
+          <div class="p-1 text-center col-12">
+            <input
+              type="button"
+              class="btn btn-success"
+              value="Insert"
+              id="btnInsert"
+            />
+          </div>
+          <div class="p-1 text-center col-4">
+            <label>Passing Year</label><br />
+            <input
+              type="number"
+              id="txtPassYearSerach"
+              placeholder="e.g. 2025"
+            />
+          </div>
+          <div class="p-1 text-center col-4">
+            <label>Result</label><br />
+            <select id="selectBox">
+              <option value="all">All</option>
+              <option value="fcwd">First Class With Distinction</option>
+              <option value="fc">First Class</option>
+              <option value="sc">Second Class</option>
+              <option value="pc">Pass Class</option>
+              <option value="fail">Fail</option>
+            </select>
+          </div>
+          <div class="p-1 text-center col-4">
+            <input
+              type="button"
+              class="btn btn-primary"
+              value="Search"
+              id="btnSearch"
+            />
+          </div>
+        </div>
+      </div>
+      <div id="table" class="container">
+        <div class="row">
+          <div class="col-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="4" class="text-center h1">Student Details</th>
+                </tr>
+                <tr class="h5">
+                  <th>Roll No.</th>
+                  <th>Student Name</th>
+                  <th>Marks</th>
+                  <th>Passing Year</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <tr>
+                  <td colspan="4" class="text-center text-danger h4">
+                    no record to display
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- script -->
+    <script>
+      // access input boxes
+      let txtRollNO = document.getElementById("txtRollNO");
+      let txtName = document.getElementById("txtName");
+      let txtMarks = document.getElementById("txtMarks");
+      let txtPassYear = document.getElementById("txtPassYear");
+      let txtPassYearSerach = document.getElementById("txtPassYearSerach");
+
+      // access drop down
+      let selectBox = document.getElementById("selectBox");
+
+      // access buttons
+      let btnInsert = document.getElementById("btnInsert");
+      let btnSearch = document.getElementById("btnSearch");
+
+      //   access table body
+      let tableBody = document.getElementById("tableBody");
+
+      // creating Student Object
+      function Student(rn, name, marks, py) {
+        this.rollNo = rn;
+        this.name = name;
+        this.marks = marks;
+        this.passingYear = py;
+      }
+
+      // create student array which can store student obj
+      let students = [];
+
+      btnInsert.addEventListener("click", function () {
+        let rollNo = txtRollNO.value;
+        let name = txtName.value;
+        let marks = txtMarks.value;
+        let passingYear = txtPassYear.value;
+        // console.log(rollNo, name, marks, passingYear);
+        if (rollNo == "" || name == "" || marks == "" || passingYear == "") {
+          alert("Please fill all details");
+          return;
+        }
+        clearTextBoxs();
+        students.push(new Student(rollNo, name, marks, passingYear));
+        console.log(students);
+        getStudentDetails(null, "students[i].marks>0");
+      });
+      btnSearch.addEventListener("click", function () {
+        // console.log("btn search");
+        let year =
+          txtPassYearSerach.value == "" ? null : txtPassYearSerach.value;
+
+        let condition = "";
+        switch (selectBox.value) {
+          case "all":
+            condition = "students[i].marks>0";
+            break;
+          case "fcwd":
+            condition = "students[i].marks>=75";
+            break;
+          case "fc":
+            condition = "students[i].marks<75 && students[i].marks>=60";
+            break;
+          case "sc":
+            condition = "students[i].marks<60 && students[i].marks>=50";
+            break;
+          case "pc":
+            condition = "students[i].marks<50 && students[i].marks>=40";
+            break;
+          case "fail":
+            condition = "students[i].marks < 40";
+            break;
+
+          default:
+            break;
+        }
+
+        getStudentDetails(year, condition);
+        clearTextBoxs();
+      });
+
+      function getStudentDetails(passingYear, cond) {
+        let str = "";
+        for (let i = 0; i < students.length; i++) {
+          if (passingYear == null || passingYear == students[i].passingYear) {
+            if (eval(cond)) {
+              str += `
+              <tr>
+                <td>${students[i].rollNo}</td>
+                <td>${students[i].name}</td>
+                <td>${students[i].marks}</td>
+                <td>${students[i].passingYear}</td>
+                </tr>
+                `;
+            }
+          }
+        }
+        if (str != "") {
+          tableBody.innerHTML = str;
+        } else {
+          tableBody.innerHTML = `<tr>
+                  <td colspan="4" class="text-center text-danger h4">
+                    no record to display with filter passing year[${
+                      passingYear == null ? "all" : passingYear
+                    }] and class[${selectBox.value}]
+                  </td>
+                </tr>`;
+        }
+      }
+
+      function clearTextBoxs() {
+        txtRollNO.value = "";
+        txtName.value = "";
+        txtMarks.value = "";
+        txtPassYear.value = "";
+        txtPassYearSerach.value = "";
+        selectBox.value = "all";
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

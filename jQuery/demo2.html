@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+      }
+      .a {
+        background-color: red;
+        transform: rotate(45deg);
+      }
+      .b {
+        background-color: green;
+        transform: rotate(90deg);
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(() => {
+        $("#btn1").click(() => {
+          // if ($("#div1").hasClass("a")) {
+          //   $("#div1").addClass("b");
+          //   $("#div1").removeClass("a");
+          // } else {
+          //   $("#div1").addClass("a");
+          //   $("#div1").removeClass("b");
+          // }
+          $("#div1").toggleClass("a b ");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="div1" class="b"></div>
+    <button id="btn1">toggle color</button>
+  </body>
+</html>

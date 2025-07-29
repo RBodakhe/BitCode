@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @media screen and (max-width: 450px) {
+        #header .first,
+        .second {
+          width: 100%;
+          display: block;
+          margin: 0;
+          padding: 20px 0 0 0;
+        }
+        .second a {
+          margin: 0;
+        }
+        #content .pic,
+        .intro {
+          width: 100%;
+          position: absolute;
+          top: 15%;
+        }
+        .pic img {
+          width: 130px;
+          height: 130px;
+          /* border-radius: 10px; */
+        }
+        .intro {
+          top: 40%;
+        }
+        .intro.intro * {
+          margin: 10px 0 0 0;
+          text-align: center;
+        }
+       #footer p {
+          text-decoration: underline;
+          font-weight: bold;
+          font-size: 2em;
+        }
+
+        #footer p::first-letter {
+          text-decoration: line-through; /* Remove underline from the first letter */
+          font-weight: bolder; /* Make the first letter bold */
+          color: red; /* Make the first letter red */
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div id="header">
+        <div class="first">
+          <sub> Rameshwar Bodakhe </sub>
+        </div>
+        <div class="second">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div id="content">
+        <div class="intro">
+          <p>Hi, I'm Rameshwar,</p>
+          <h1>
+            A <br />
+            Web <br />
+            Developer
+          </h1>
+          <p>
+            passionate about building modern, responsive, and user-friendly
+            websites. I enjoy crafting clean code and creating seamless digital
+            experiences. <br />
+            <button>Resume</button>
+          </p>
+        </div>
+
+        <div class="pic">
+          <img src="G:\My Drive\MY DOCUMENT\MY DOCUMENT/img.jpg" alt="" />
+        </div>
+      </div>
+      <div id="footer">
+        <p>@_2025 By RBodakhe8010</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .inp,
+      .lbl,
+      .btn {
+        width: 30%;
+        height: 30px;
+        text-align: left;
+        margin: 5px;
+        padding: 10px 0;
+      }
+      .btn {
+        background-color: lightblue;
+        text-align: center;
+      }
+     
+      table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: auto;
+      }
+
+      tr td,
+      tr th {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        border-left: 1px dashed rgb(233, 57, 57);
+        border-right: 1px dashed rgb(184, 54, 54);
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="#" style="text-align: center">
+      <label class="lbl">Roll No.:</label><br />
+      <input class="inp" type="number" id="txtRollNo" /><br />
+      <label class="lbl">Name:</label><br />
+      <input class="inp" type="text" id="txtName" /><br />
+      <label class="lbl">Marks:[out of 100]</label><br />
+      <input class="inp" type="number" id="txtMarks" min="0" max="100" /><br />
+      <input class="btn" type="button" value="Add Row" onclick="addRow()" />
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3">Students details</th>
+        </tr>
+        <tr>
+          <th>Roll No.</th>
+          <th>Name</th>
+          <th>Marks</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <script>
+      let inps = document.querySelectorAll("input");
+      let tbody = document.getElementById("tbody");
+      let students = [];
+      //   console.log(inps);
+      function addRow() {
+        let rollNo = inps[0].value;
+        let name = inps[1].value;
+        let marks = inps[2].value;
+        if (rollNo == "" || name == "" || marks == "") {
+          return;
+        }
+        clearDataFeilds();
+        students.push(new Student(rollNo, name, marks));
+        console.log(students);
+        let newTr = document.createElement("tr");
+        let newTd = createTd(rollNo);
+        newTr.append(newTd);
+        newTd = createTd(name);
+        newTr.append(newTd);
+        newTd = createTd(marks);
+        newTr.append(newTd);
+        tbody.appendChild(newTr);
+      }
+      function clearDataFeilds() {
+        for (let i = 0; i < inps.length - 1; i++) {
+          inps[i].value = "";
+        }
+      }
+      function createTd(txt) {
+        let td = document.createElement("td");
+        let txtNode = document.createTextNode(txt);
+        td.append(txtNode);
+        return td;
+      }
+
+      function Student(rollNo, name, marks) {
+        this.rollNo = rollNo;
+        this.name = name;
+        this.marks = marks;
+      }
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="d1"></div>
+    <script>
+      let div1 = document.getElementById("d1");
+      setInterval(funTime(), 1000);
+      function funTime() {
+        let time = new Date();
+        div1.innerHTML = `
+        ${time.toDateString()}<br>
+        ${time.toTimeString()}<br>
+
+        `;
+      }
+    </script>
+  </body>
+</html>

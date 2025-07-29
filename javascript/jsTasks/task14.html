@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1" style="width: 50%">
+      <tr>
+        <td>a</td>
+        <td>b</td>
+        <td>c</td>
+        <td>d</td>
+        <td>e</td>
+        <td>f</td>
+      </tr>
+      <tr>
+        <td>a</td>
+        <td>b</td>
+        <td>c</td>
+        <td>d</td>
+        <td>e</td>
+        <td>f</td>
+      </tr>
+      <tr>
+        <td>g</td>
+        <td>h</td>
+        <td>i</td>
+        <td>j</td>
+        <td>k</td>
+        <td>l</td>
+      </tr>
+      <tr>
+        <td>m</td>
+        <td>n</td>
+        <td>o</td>
+        <td>p</td>
+        <td>q</td>
+        <td>r</td>
+      </tr>
+      <tr>
+        <td>s</td>
+        <td>t</td>
+        <td>u</td>
+        <td>v</td>
+        <td>w</td>
+        <td>x</td>
+      </tr>
+      <tr>
+        <td>y</td>
+        <td>z</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <script>
+      let table = document.querySelector("table");
+      table.addEventListener("click", (event) => {
+        let tr = event.target.closest("tr");//f tr
+        let tds = tr.querySelectorAll("td"); //012345
+        let index;
+        for (let i = 0; i < tds.length; i++) {
+          if (tds[i] == event.target) {
+            console.log(i);
+            index = i;
+          }
+        }
+        let trs = table.querySelectorAll("tr");
+        for (let i = 0; i < trs.length; i++) {
+          tds = trs[i].querySelectorAll("td");
+          tds[index].remove();
+        }
+      });
+    </script>
+  </body>
+</html>

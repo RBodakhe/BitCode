@@ -1,0 +1,154 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .demo{
+            width: 200px;
+            height: 200px;
+            border: 1px dashed blueviolet;
+        }
+    </style>
+  </head>
+  <body>
+    <p>this is p1</p>
+    <div id="d1">
+      this is div1
+      <p>this is p2</p>
+      <p>this is p3</p>
+      <p>this is p4</p>
+    </div>
+    <p>this is p5</p>
+    <input type="button" value="click" onclick="funClick()" />
+    <script>
+      let ele = document.getElementById("d1");
+      function funClick() {
+        // // remove element from document
+        // let p5 = ele.nextElementSibling;
+        // p5.parentNode.removeChild(p5);
+
+        // insert new element
+        // create element node
+        let newDiv = document.createElement("div");
+        // create text node
+        let txtNode = document.createTextNode(
+          "This is new div created dynamically"
+        );
+        // append text node to element node
+        newDiv.appendChild(txtNode);
+        ele.parentElement.appendChild(newDiv);
+
+        // newDiv.classList.add("demo");
+        newDiv.setAttribute("class","demo");
+      }
+    </script>
+  </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label >Color Name:</label>
+    <input type="text" id="txtName"><br>
+    <input type="button" value="add color" onclick="addColor()">
+    <ul id="ul1">
+        <li>red</li>
+        <li>green</li>
+    </ul>
+
+    <script>
+        let txtName=document.getElementById("txtName");
+        let ul=document.getElementById("ul1");
+        function addColor(){
+            // console.log("called")
+            let colorName=txtName.value;
+            if (colorName=="") {
+                return;
+            }
+            txtName.value="";
+            txtName.focus();
+            let newLi=document.createElement("li");
+            let txtNode=document.createTextNode(colorName);
+            newLi.appendChild(txtNode);
+            ul.appendChild(newLi);
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1" style="width: 50%" id="tbl">
+      <tr>
+        <th>Roll NO</th>
+        <th>Name</th>
+        <th>Marks</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>AAA</td>
+        <td>78</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>BBB</td>
+        <td>68</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>CCC</td>
+        <td>80</td>
+      </tr>
+    </table>
+    <div id="d1"></div>
+    <script>
+      let tbl = document.getElementById("tbl");
+      let div = document.getElementById("d1");
+      // tbl.addEventListener("click",function(event){
+      //     // get target element
+      //     let tElement=event.target
+
+      //     // get parent element of target element
+      //     let pElement=tElement.parentElement;
+      //     console.log(pElement.children);
+      //     console.log(pElement.childNodes);
+
+      //     let tds=pElement.children;
+      //     let str=`
+      //     <b>Roll NO.</b><i>${tds[0].textContent}</i><br>
+      //     <b>Name</b><i>${tds[1].textContent}</i><br>
+      //     <b>Marks</b><i>${tds[2].textContent}</i><br>
+      //     `;
+      //     div.innerHTML=str;
+
+      // });
+      tbl.addEventListener("click", function (event) {
+        // get target element
+        let tElement = event.target;
+        // console.log(tElement.nodeName)
+        if (tElement.nodeName != "TH") {
+          // get parent element of target element
+          let pElement = tElement.parentElement;
+          console.log(pElement);
+          pElement.style.backgroundColor="red";
+          setTimeout(() => {
+            pElement.parentElement.removeChild(pElement);
+          }, 100);
+        }
+      });
+    </script>
+  </body>
+</html>

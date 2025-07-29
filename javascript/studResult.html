@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <label for="">Student Name: </label>
+      <input type="text" id="txtFirstName" placeholder="first name" />
+      <input type="text" id="txtLastName" placeholder="last name(surname)" />
+      <br />
+      <label for="">Marks of following Subjects</label>
+      <br />
+      <label for="">Marathi: </label>
+      <input type="number" id="sub1" />
+      <br />
+      <label for="">English: </label>
+      <input type="number" id="sub2" />
+      <br />
+      <label for="">Hindi: </label>
+      <input type="number" id="sub3" />
+      <br />
+      <input type="button" value="Result" onclick="printResult()" />
+    </form>
+
+    <table id="result">
+
+    </table>
+
+    <script>
+      var txtFirstName = document.getElementById("txtFirstName");
+      var txtLastName = document.getElementById("txtLastName");
+      var result = document.getElementById("result");
+      var txtSub1 = document.getElementById("sub1");
+      var txtSub2 = document.getElementById("sub2");
+      var txtSub3 = document.getElementById("sub3");
+
+      
+      function printResult() {
+        var marks1 = parseInt( txtSub1.value);
+        var marks2 = parseInt(txtSub2.value);
+        var marks3 = parseInt(txtSub3.value);
+
+        let per = ((marks1+marks2+marks3)/300)*100;
+        console.log(per);
+
+        if (per >= 75) {
+            res="first class with desitantion";
+        }
+        else{
+            res="pass";
+            
+        }
+
+        result.innerHTML = "<tr><th>Name</th><td>"+txtFirstName.value+" "+txtLastName.value+"</td></tr>"+
+        "<tr><th>Marathi</th><td>"+marks1+"</td></tr>"+
+        "<tr><th>English</th><td>"+marks2+"</td></tr>"+
+        "<tr><th>Hindi</th><td>"+marks3+"</td></tr>"+
+        "<tr><th>Percentage</th><td>"+per+"</td></tr>"+
+        "<tr><th>Result</th><td>"+res+"</td></tr>";
+      }
+    </script>
+
+    <!--     
+    <table id="Result">
+        <tr>
+            <th>
+                Name:
+            </th>
+            <td colspan="2">
+                xyz
+            </td>
+        </tr>
+        <tr>
+            <th>
+                subjects
+            </th>
+            <th>
+                marks
+            </th>
+            <th>
+                grade
+            </th>
+        </tr>
+
+    </table> -->
+  </body>
+</html>

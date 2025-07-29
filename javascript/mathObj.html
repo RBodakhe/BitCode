@@ -1,0 +1,193 @@
+<!-- Math Object -->
+<!-- 
+1. Math.PI
+2. Math.abs()
+3. Math.min()
+4. Math.max()
+5. Math.sqrt()
+6. Math.pow()
+7. Math.round()
+8. Math.floor()
+9. Math.ceil()
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Object Methods</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        padding: 20px;
+      }
+      h2 {
+        color: #333;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        background: #fff;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background: #f0f0f0;
+      }
+      code {
+        background-color: #f3f3f3;
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>JavaScript Math Object Methods</h2>
+    <table>
+      <tr>
+        <th>Method</th>
+        <th>Parameters</th>
+        <th>Return</th>
+        <th>Example</th>
+        <th>Output</th>
+      </tr>
+      <tr>
+        <td><code>Math.PI</code></td>
+        <td>None</td>
+        <td>π (approx. 3.14159)</td>
+        <td><code>Math.PI</code></td>
+        <td>
+          <script>
+            document.write(Math.PI);
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.abs(x)</code></td>
+        <td>1 number (x)</td>
+        <td>Absolute (positive) value</td>
+        <td><code>Math.abs(-7)</code></td>
+        <td>
+          <script>
+            document.write(Math.abs(-7));
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.min(a, b, ...)</code></td>
+        <td>Multiple numbers</td>
+        <td>Smallest value</td>
+        <td><code>Math.min(2, 5, -3, 7)</code></td>
+        <td>
+          <script>
+            document.write(Math.min(2, 5, -3, 7));
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.max(a, b, ...)</code></td>
+        <td>Multiple numbers</td>
+        <td>Largest value</td>
+        <td><code>Math.max(2, 5, -3, 7)</code></td>
+        <td>
+          <script>
+            document.write(Math.max(2, 5, -3, 7));
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.sqrt(x)</code></td>
+        <td>1 number (x)</td>
+        <td>Square root</td>
+        <td><code>Math.sqrt(25)</code></td>
+        <td>
+          <script>
+            document.write(Math.sqrt(25));
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.pow(x, y)</code></td>
+        <td>2 numbers: base x and exponent y</td>
+        <td>x raised to the power y</td>
+        <td><code>Math.pow(2, 3)</code></td>
+        <td>
+          <script>
+            document.write(Math.pow(2, 3));
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.round(x)</code></td>
+        <td>1 number (x)</td>
+        <td>Nearest integer</td>
+        <td><code>Math.round(4.6)</code></td>
+        <td>
+          <script>
+            document.write(Math.round(4.6));
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.floor(x)</code></td>
+        <td>1 number (x)</td>
+        <td>Largest integer ≤ x</td>
+        <td><code>Math.floor(4.9)</code></td>
+        <td>
+          <script>
+            document.write(Math.floor(4.9));
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Math.ceil(x)</code></td>
+        <td>1 number (x)</td>
+        <td>Smallest integer ≥ x</td>
+        <td><code>Math.ceil(4.1)</code></td>
+        <td>
+          <script>
+            document.write(Math.ceil(4.1));
+          </script>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+<!-- Global Object -->
+<!-- 
+Method	Description
+1. eval(code)-	Evaluates a string of JavaScript code. (Use with caution)
+2. isFinite(value)-	Returns true if the value is a finite number.
+3. isNaN(value)-	Returns true if the value is NaN.
+4. parseFloat(value)-	Converts a string to a floating-point number.
+5. parseInt(value)-	Converts a string to an integer.
+6. encodeURI(uri)-	Encodes a URI by escaping special characters.
+7. decodeURI(uri)-	Decodes an encoded URI.
+8. encodeURIComponent(value)-	Encodes a URI component (more strict).
+9. decodeURIComponent(value)-	Decodes a URI component.
+10. escape(str)-	Encodes a string (obsolete, use encodeURIComponent).
+11. unescape(str)-	Decodes a string encoded with escape (obsolete).
+12. globalThis-	Refers to the global object in any context (universal reference).
+ -->
+
+ <!-- system popups -->
+  <!-- window.alert()//only for display info -->
+  <!-- window.confirm()//returns boolean value -->
+  <!-- window.prompt()//for user input -->
+   Method	Purpose	Return Type	Use Case
+window.alert()	-Display information to user	
+                -undefined	
+                -Notifications, warnings
+window.confirm()-Ask user to confirm or cancel	
+                -boolean (true/false)	
+                -Confirming actions (e.g., delete?)
+window.prompt()	-Ask user to input text	
+                -string or null	
+                -Getting input from user
+

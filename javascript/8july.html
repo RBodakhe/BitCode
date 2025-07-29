@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+        let arr = new Array();
+        console.log(arr instanceof Array);//true
+        console.log(arr instanceof Object);//true
+    </script> -->
+
+    <label for="txtName">Product Name:</label>
+    <input type="text" id="txtName" /><br />
+    <label for="txtPrice">Product Price:</label>
+    <input type="text" id="txtPrice" /><br />
+    <input type="button" value="add" onclick="addProduct()" />
+    <input type="button" value="update" onclick="updateProduct()" />
+
+    <ol id="list"></ol>
+    <script>
+      let txtName = document.getElementById("txtName");
+      let txtPrice = document.getElementById("txtPrice");
+      let list = document.getElementById("list");
+
+      list.addEventListener("click", function (event) {
+        let str = event.target.textContent;
+        txtName.value = str.split(": ")[0];
+        txtPrice.value = str.split(": ")[1];
+        txtName.readOnly = true;
+      });
+      let prodArr = [];
+
+      function Product(name, price) {
+        this.prodName = name;
+        this.prodPrice = price;
+      }
+      function addProduct() {
+        let prodName = txtName.value;
+        let prodPrice = txtPrice.value;
+        if (prodName == "" || prodPrice == "") {
+          return;
+        }
+        prodArr.push(new Product(prodName, prodPrice));
+        // prodArr = new Set(prodArr);
+
+        display();
+
+        txtName.value = "";
+        txtPrice.value = "";
+      }
+
+      function display() {
+        let lis = "";
+        for (let i = 0; i < prodArr.length; i++) {
+          //   for (const key in prodArr[i]) {
+          lis += `<li>${prodArr[i].prodName}: ${prodArr[i].prodPrice}</li>`;
+          //   }
+        }
+        list.innerHTML = lis;
+        console.log(prodArr);
+      }
+      function updateProduct() {
+        let name = txtName.value;
+        let price = txtPrice.value;
+        if (name == "" || price == "") {
+          return;
+        }
+        for (let i = 0; i < prodArr.length; i++) {
+          if (prodArr[i].prodName == name) {
+            prodArr[i].prodPrice = price;
+          }
+        }
+        display();
+        txtName.value = "";
+        txtPrice.value = "";
+        txtName.readOnly = false;
+      }
+    </script>
+  </body>
+</html>

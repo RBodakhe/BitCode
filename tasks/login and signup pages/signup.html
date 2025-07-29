@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <style>
+      body {
+        background-color: #f0f4f8;
+        font-family: Arial, sans-serif;
+      }
+      form {
+        background: #fff;
+        max-width: 350px;
+        margin: 40px auto;
+        padding: 30px 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      #sHeading {
+        color: #1976d2;
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        text-align: left;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        width: 90%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #bdbdbd;
+        border-radius: 5px;
+      }
+      input[type="submit"],
+      input[type="reset"] {
+        width: 45%;
+        padding: 8px;
+        margin: 5px 2%;
+        border: none;
+        border-radius: 5px;
+        background-color: #1976d2;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover,
+      input[type="reset"]:hover {
+        background-color: #1565c0;
+      }
+      a {
+        color: #1976d2;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      img {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="login.html">
+      <img
+        src="https://bitcode.in/images/logo/bitcode.png"
+        style="width: 200px; height: 200px"
+      />
+
+      <h1 id="sHeading">Sign Up Form</h1>
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required /><br /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+      /><br /><br />
+      <label for="gender">Select Gender</label>
+      <input type="radio" name="gender" id="" value="Male" /> Male
+      <input type="radio" name="gender" id="" value="Female" /> Female
+      <br /><br />
+      <label for="lang">Select languages that you know:</label><br /><br />
+      <input type="checkbox" value="C" /> C Lang
+      <input type="checkbox" value="C++" /> C++ Lang
+      <input type="checkbox" value="Java" /> Java Lang <br /><br />
+      <input type="checkbox" value="Python" /> C Lang
+      <input type="checkbox" value="PHP" /> C++ Lang
+      <input type="checkbox" value="JavaScript" /> JavaScript Lang <br /><br />
+
+      <input type="submit" value="Sign Up" />
+      <input type="reset" value="Reset" /><br /><br />
+
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </body>
+</html>

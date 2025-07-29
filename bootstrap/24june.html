@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- form class for vertical layout -->
+    <!-- 
+    form
+        form-group
+            form-label
+            form-control
+            form-check-input
+            form-select
+     -->
+    <!-- form class for horizontal layout -->
+    <!-- 
+    form
+        form-group
+            col-6 col-form-label
+            col-6 col-form-control
+            col-6 col-form-check-input
+            col-6 col-form-select
+     -->
+
+    <!-- vertical layout -->
+    <!-- <form
+      action="#"
+      class="form bg-secondary p-5"
+      style="width: 50%; margin: auto"
+    >
+      <div class="form-group">
+        <label for="" class="form-label">Name:</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="" class="form-label">Password:</label>
+        <input type="password" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="" class="form-label">Result:</label>
+        <input type="radio" class="form-check-input" name="result" value="p" />
+        pass
+        <input type="radio" class="form-check-input" name="result" value="f" />
+        fail
+      </div>
+      <div class="form-group">
+        <label for="" class="form-label">City:</label>
+        <select name="city" id="" class="form-select">
+          <option value="*">select</option>
+          <option value="*">pune</option>
+          <option value="*">mumbai</option>
+          <option value="*">nagpur</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input
+          type="button"
+          value="submit"
+          class="form-control btn btn-primary"
+        />
+      </div>
+    </form> -->
+
+    <!-- horizontal layout -->
+    <!-- <form action="#" class="form bg-info p-5" style="width: 50%; margin: auto">
+      <div class="row">
+        <div class="col-2"></div>
+        <label for="" class="col-4 col-form-label">Name:</label>
+        <input type="text" name="" id="" class="col-4 col-form-control" />
+        <div class="col-2"></div>
+        <div class="col-2"></div>
+        <label for="" class="col-4 col-form-label">Password:</label>
+        <input type="password" name="" id="" class="col-4 col-form-control" />
+        <div class="col-2"></div>
+        <div class="col-4"></div>
+        <input
+          type="submit"
+          value="submit"
+          name=""
+          id=""
+          class="col-4 col-form-control"
+        />
+        <div class="col-4"></div>
+      </div>
+    </form> -->
+
+    <!-- rounded thumnail -->
+
+    <!-- accordion classes -->
+    <!-- 
+    accordion 
+        accordion-item
+            accordion-button
+            accordion-collapse collapse
+                accordion-body
+     -->
+
+     <!-- utility classes -->
+      <!-- 
+     # = [0-5]
+     n# = -[0-5]
+     mt-# = set the top margin of an element.
+     ms-# = set the start margin of an element.
+     me-# = set the end margin of an element.
+     mb-# = set the bottom margin of an element.
+     mx-# = set the left and 
+      -->
+    <div class="container mt-3">
+      <div class="accordion" id="myAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelCollapse1"
+              aria-expanded="true"
+              aria-controls="panelCollapse1"
+            >
+              HTML
+            </button>
+          </h2>
+          <div
+            id="panelCollapse1"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#myAccordion"
+          >
+            <div class="accordion-body">HTML (HyperText Markup Language): HTML is the foundation of web development, providing the structure and content for webpages. It uses tags to define elements like headings, paragraphs, images, and links, telling the browser how to display the content. For example, the <p> tag is used to create paragraphs, and the <a> tag creates hyperlinks. 
+</div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelCollapse2"
+              aria-expanded="false"
+              aria-controls="panelCollapse2"
+            >
+              CSS
+            </button>
+          </h2>
+          <div
+            id="panelCollapse2"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#myAccordion"
+          >
+            <div class="accordion-body">CSS (Cascading Style Sheets): CSS handles the visual presentation of a webpage. It allows developers to style the appearance of HTML elements, controlling aspects like colors, fonts, layout, and responsiveness. CSS rules are applied to HTML elements based on selectors, such as element types, classes, or IDs. For instance, you can use CSS to set a background color for a specific paragraph or to arrange elements in a grid layout. </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelCollapse3"
+              aria-expanded="false"
+              aria-controls="panelCollapse3"
+            >
+              JavaScript
+            </button>
+          </h2>
+          <div
+            id="panelCollapse3"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#myAccordion"
+          >
+            <div class="accordion-body">JavaScript: JavaScript adds interactivity and dynamic behavior to websites. It allows developers to respond to user actions, manipulate the content of a webpage, and communicate with servers. JavaScript can be used to create animations, validate forms, update content without page reloads, and much more. For example, it can be used to show or hide elements based on user interaction or to create interactive charts and graphs. </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

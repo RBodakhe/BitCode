@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Bootstrap Starter Template" />
+    <meta name="author" content="Your Name" />
+    <title>My Bootstrap Template</title>
+    <link rel="stylesheet" href="task13_2.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons (Correct Version) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <h1 class="text-center text-primary">Welcome to ABC Bank</h1>
+      <div id="login">
+        <div class="row p-2" style="height: 50vh">
+          <div class="col-sm-12 col-lg-4">
+            <div class="card mb-4">
+              <div class="card-header bg-primary text-white">
+                Account Details
+              </div>
+              <div class="card-body">
+                <table>
+                  <tr>
+                    <td>
+                      <label style="font-weight: bold">Account Number:</label>
+                    </td>
+                    <td>
+                      <label id="lblAccountNo" style="font-style: italic"
+                        >---</label
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label style="font-weight: bold"
+                        >Account Holder Name:</label
+                      >
+                    </td>
+                    <td>
+                      <label id="lblAccountHName" style="font-style: italic"
+                        >---</label
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label style="font-weight: bold">Date Of Birth:</label>
+                    </td>
+                    <td>
+                      <label id="lblDob" style="font-style: italic">---</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label style="font-weight: bold"
+                        >Available Balance:</label
+                      >
+                    </td>
+                    <td>
+                      <label id="lblBalance" style="font-style: italic"
+                        >---</label
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <button class="btn btn-outline-danger mt-2 w-100" id="btnLogout">
+              Logout
+            </button>
+            <button class="btn btn-outline-primary mt-2 w-100" id="btnDeposit">
+              Deposit
+            </button>
+
+            <button class="btn btn-outline-success mt-2 w-100" id="btnWithdraw">
+              Withdraw
+            </button>
+
+            <button class="btn btn-outline-warning mt-2 w-100" id="btnTransfer">
+              Transfer
+            </button>
+          </div>
+          <div class="col-sm-6 col-lg-5 ps-5 pe-5">
+            <div id="divDeposit" class="text-center ps-5 pe-5">
+              <input
+                type="number"
+                class="form-control mt-3"
+                placeholder="Enter Amount"
+                id="txtDepositAmount"
+              />
+              <input
+                type="button"
+                class="form-control form-control-lg w-50 mt-4 btn btn-primary"
+                value="Deposit Amount"
+                id="btnDepositAmount"
+              />
+            </div>
+            <div id="divWithdraw" class="text-center">
+              <input
+                type="number"
+                class="form-control mt-3"
+                placeholder="Enter Amount"
+                id="txtWithdrawAmount"
+              />
+              <input
+                type="button"
+                class="form-control form-control-lg w-50 mt-4 btn btn-success"
+                value="Withdraw Amount"
+                id="btnWithdrawAmount"
+              />
+            </div>
+            <div id="divTransfer" class="text-center">
+              <input
+                type="text"
+                class="form-control mt-3"
+                placeholder="Account Number"
+                id="txtTAccNo"
+              />
+              <input
+                type="text"
+                class="form-control mt-3"
+                placeholder="Account Holder Name"
+                id="txtTAccName"
+              />
+              <input
+                type="number"
+                class="form-control mt-3"
+                placeholder="Enter Amount"
+                id="txtTransferAmount"
+              />
+              <input
+                type="button"
+                class="form-control form-control-lg w-50 mt-4 btn btn-warning"
+                value="Transfer Amount"
+                id="btnTransferAmount"
+              />
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header bg-dark text-white">
+                Transaction History
+              </div>
+              <div class="card-body p-0">
+                <table class="table table-striped">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>Transaction Id</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Status</th>
+                      <th>Remark</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody id="transactionTableBody">
+                    <!-- JavaScript will insert rows here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="loginForm">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6 p-5">
+            <h2 class="text-center text-primary">Login</h2>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="account no"
+              id="txtANo"
+            />
+            <label for="txtANo" class="form-label">Account No</label>
+            <input
+              type="date"
+              class="form-control"
+              placeholder="Date of Birth"
+              id="txtDOB"
+            />
+            <label for="txtDOB" class="form-label">Date of Birth</label>
+            <div class="text-center">
+              <input type="button" class="btn btn-primary" value="Login" />
+            </div>
+            <label for="createAccount"
+              >Don't have an account?
+              <button
+                class="btn text-primary"
+                id="createAccount"
+                onclick="showcreateAccountForm()"
+              >
+                create one
+              </button></label
+            >
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+      <div id="createAccountForm">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6 p-5">
+            <h2 class="text-center text-primary">Create Account</h2>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="first name middle name last name"
+              id="txtName"
+            />
+            <label for="txtName" class="form-label">Account Holder Name</label>
+            <input
+              type="date"
+              class="form-control"
+              placeholder="Date of Birth"
+              id="txtDOB2"
+            />
+            <label for="txtDOB2" class="form-label">Date of Birth</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Initial Balance"
+              min="500"
+              id="txtInitBalance"
+            />
+            <label for="txtName" class="form-label">Initial Balance</label>
+            <div class="text-center">
+              <input
+                type="button"
+                class="btn btn-primary"
+                value="Create Account"
+                onclick="createAccount()"
+              />
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+    </div>
+    <!-- js -->
+    <script src="task13_2.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

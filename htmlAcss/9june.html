@@ -1,0 +1,58 @@
+<html>
+<head>
+    
+    <!-- <title>Image as a hyperlink</title> -->
+    <title>CSS Properities</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+
+            /* border */
+            /* border: 2px solid red; */
+            border-width: 5 px 10px 15px 0px; /* top right bottom left */
+            border-style: solid dotted dashed double; /* solid, dotted, dashed, double, groove, ridge, inset, outset */
+            border-color: red green blue yellow; /* top right bottom left */
+
+            /* margin */
+            margin: 10px 20px 30px 40px; /* top right bottom left */
+
+            /* padding */
+            padding: 5px 10px 15px 20px; /* top right bottom left */
+
+            /* background */
+            /* color name */
+            /* background-color: lightblue; */
+             /* rgba(red, green, blue, alpha)  */
+            /* background-color: rgba(100,200,250,0.5); */
+            /* background-color: hsla(hue, saturation, lightness, alpha) */
+            /* background-color: hsla(120, 100%, 50%,0.5);  */
+            /* background-color: #rrggbb; hex color code */
+            background-color: #ff0000;
+            /* background: linear-gradient(180deg,red, green, blue ,white,black); */
+            /* background: linear-gradient(180deg(default if not mentioned),colors list (seperated by , coomo)*/
+            /* background: radial-gradient(red, green, blue ,white,black); */
+
+            /* background-image */
+            background-image: url('trekkON.jpg');
+            background-size: 30% 75%; /* width height */
+            background-repeat: no-repeat; /* repeat, no-repeat, repeat-x, repeat-y */
+            background-position: 10px 20px; /* x y */
+
+            /* multiple background images */
+            background: url('trekkON.jpg') 25px 25px no-repeat, url('img14.jpg') 125px 125px no-repeat, url('img6.jpg') 0px no-repeat;
+            background-size: 100px,100px,100%;
+
+
+
+
+        }
+    </style>
+</head>
+<body>
+    <!-- <a href="https://www.google.com/search?q=images+of+books&rlz=1C1CHBD_enIN1004IN1004&oq=images+of+books&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCTEzNTQ1ajBqNKgCALACAA&sourceid=chrome&ie=UTF-8">
+        <img src="trekkON.jpg" alt="my image" style="height: 250px; width: 250px;">
+    </a> -->
+    <div>This is a div</div>
+</body>
+</html>

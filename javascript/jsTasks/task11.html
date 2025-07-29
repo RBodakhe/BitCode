@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <style>
+      input {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main" class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div class="form">
+            <div class="row">
+              <div class="col-12 text-warning text-center h1">
+                Insert Student Record
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 text-center">
+                <label>Student:</label>
+              </div>
+              <div class="col-3">
+                <label>Roll No.</label>
+              </div>
+              <div class="col-3">
+                <label>Name</label>
+              </div>
+              <div class="col-3">
+                <label>Marks</label>
+              </div>
+              <div class="col-3"></div>
+              <div class="col-3">
+                <input type="number" class="txtRollNo" placeholder="roll no" />
+              </div>
+              <div class="col-3">
+                <input type="text" class="txtName" placeholder="name" />
+              </div>
+              <div class="col-3">
+                <input type="number" class="txtMarks" placeholder="marks" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex justify-content-between ps-5 mt-2">
+                <button class="btn btn-outline-success p-1 ms-5" id="btnInsert">
+                  Insert Record[s]
+                </button>
+
+                <button class="btn btn-outline-danger p-1" id="btnAddRow">
+                  <span class="h5">+</span>Add Row
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="table">
+            <div class="row">
+              <div class="col-12 text-warning text-center h1">
+                Student Table
+              </div>
+              <div class="col-12">
+                <table class="table" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>Roll No.</th>
+                      <th>Name</th>
+                      <th>Marks</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody">
+                    <tr>
+                      <td colspan="3" class="text-danger text-center">
+                        no record yet
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let btnAddRow = document.getElementById("btnAddRow");
+      let btnInsert = document.getElementById("btnInsert");
+      let students = [];
+      function Student(rn, name, marks) {
+        this.rollNo = rn;
+        this.name = name;
+        this.marks = marks;
+      }
+      btnInsert.addEventListener("click", function () {
+        // Select all input fields
+        let txtRollNos = document.getElementsByClassName("txtRollNo");
+        let txtNames = document.getElementsByClassName("txtName");
+        let txtMarks = document.getElementsByClassName("txtMarks");
+        if (isNotEmpty(txtRollNos, txtNames, txtMarks)) {
+          for (let i = 0; i < txtRollNos.length; i++) {
+            let rollNo = txtRollNos[i].value;
+            let name = txtNames[i].value;
+            let marks = txtMarks[i].value;
+            let stud = new Student(rollNo, name, marks);
+            students.push(stud);
+          }
+          //   console.log(students);
+          displayStudents();
+          clearRows();
+        } else {
+          alert("all fields are madetory");
+        }
+      });
+
+      btnAddRow.addEventListener("click", (event) => {
+        // Select current input fields before adding a new row
+        let oldRollNos = document.getElementsByClassName("txtRollNo");
+        let oldNames = document.getElementsByClassName("txtName");
+        let oldMarks = document.getElementsByClassName("txtMarks");
+
+        if (isNotEmpty(oldRollNos, oldNames, oldMarks)) {
+          let condition = confirm(
+            "Once you add a new row, previous fields will become read-only. Do you want to continue?"
+          );
+
+          if (condition) {
+            // Make only old fields read-only
+            makeReadOnly(oldRollNos, oldNames, oldMarks);
+
+            // Get button row and the row just above it (to copy)
+            let btnRow = event.currentTarget.closest(".row");
+            let rowToCopy = btnRow.previousElementSibling;
+
+            // Clone that row
+            let clonedRow = rowToCopy.cloneNode(true);
+
+            // Clear the input values in cloned row
+            clonedRow.querySelectorAll("input").forEach((input) => {
+              input.value = "";
+              input.readOnly = false; // Ensure cloned inputs are editable
+            });
+
+            // Insert the new row before the button row
+            btnRow.parentNode.insertBefore(clonedRow, btnRow);
+          }
+        } else {
+          alert("⚠️ Please fill all the input fields before adding a new row.");
+        }
+      });
+
+      // Function to check if all input fields are filled
+      function isNotEmpty(rolls, names, marks) {
+        for (let element of rolls) {
+          if (element.value.trim() === "") return false;
+        }
+        for (let element of names) {
+          if (element.value.trim() === "") return false;
+        }
+        for (let element of marks) {
+          if (element.value.trim() === "") return false;
+        }
+        return true;
+      }
+
+      // Function to make specific inputs read-only
+      function makeReadOnly(rolls, names, marks) {
+        for (let element of rolls) {
+          element.readOnly = true;
+        }
+        for (let element of names) {
+          element.readOnly = true;
+        }
+        for (let element of marks) {
+          element.readOnly = true;
+        }
+      }
+      function clearRows() {
+        // Get button row and the row just above it (to copy)
+        let btnRow = btnAddRow.closest(".row");
+        let rowToCopy = btnRow.previousElementSibling;
+
+        // Clone that row
+        let clonedRow = rowToCopy.cloneNode(true);
+        // Select all rows that contain input fields
+        let allInputs = document.querySelectorAll(
+          ".txtRollNo, .txtName, .txtMarks"
+        );
+
+        // Remove the entire row (parent `.row`) containing each set of inputs
+        let cleared = new Set(); // to prevent deleting the same row multiple times
+        allInputs.forEach((input) => {
+          let row = input.closest(".row");
+          if (!cleared.has(row)) {
+            row.remove();
+            cleared.add(row);
+          }
+        });
+
+        // Clear the input values in cloned row
+        clonedRow.querySelectorAll("input").forEach((input) => {
+          input.value = "";
+          input.readOnly = false; // Ensure cloned inputs are editable
+        });
+
+        // Insert the new row before the button row
+        btnRow.parentNode.insertBefore(clonedRow, btnRow);
+      }
+      function displayStudents() {
+        let tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+        for (let i = 0; i < students.length; i++) {
+          let row = document.createElement("tr");
+          let td1 = document.createElement("td");
+          let td2 = document.createElement("td");
+          let td3 = document.createElement("td");
+
+          let txtNode1 = document.createTextNode(students[i].rollNo);
+          let txtNode2 = document.createTextNode(students[i].name);
+          let txtNode3 = document.createTextNode(students[i].marks);
+          td1.appendChild(txtNode1);
+          td2.appendChild(txtNode2);
+          td3.appendChild(txtNode3);
+          row.appendChild(td1);
+          row.appendChild(td2);
+          row.appendChild(td3);
+          tableBody.appendChild(row);
+        }
+      }
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

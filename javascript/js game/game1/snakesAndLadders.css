@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#bgImg {
+  height: 90vh;
+  width: 100%;
+  margin: 5vh 0;
+  background-color: wheat !important;
+  background-image: url("https://www.shutterstock.com/image-vector/ladder-snakes-gamefunny-frame-childrenvector-600nw-2493809451.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 90vh;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+td {
+  height: 9%;
+  width: 10%;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.pawn {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  position: absolute;
+  display: inline-block;
+  outline: 4px solid #00000088;
+  outline-offset: 0px;
+}
+
+.p0 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.p1 {
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+.p2 {
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+.p3 {
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+.p4 {
+  top: 50%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
+.yellow {
+  background-color: yellow;
+}
+.blue {
+  background-color: blue;
+}
+
+.lPawn {
+  height: 24px;
+  width: 24px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  line-height: 24px;
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+}
+#diceRoll{
+  transition: all 1s linear;
+}
+.ani1 {
+  padding: 10px 50px;
+  color: red;
+  font-weight: bold;
+  animation: ani1 2s linear infinite;
+  text-align: center;
+}
+img[id="diceRoll"] {
+  background: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  margin: auto;
+}
+@keyframes ani1 {
+  0% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+
+/* 🔁 Animate outline for current player pawn */
+.ani2 {
+  animation: ani2 0.5s linear infinite reverse;
+}
+
+@keyframes ani2 {
+  0% {
+    outline: 4px solid #000000ff;
+    outline-offset: 0px;
+  }
+  100% {
+    outline: 4px solid #00000000;
+    outline-offset: 5px;
+  }
+}
+
+/* 🎯 Style message box */
+#msg {
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}

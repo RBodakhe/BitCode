@@ -1,0 +1,36 @@
+<form id="productForm">
+  <input type="text" id="title" placeholder="Enter Product Title" required />
+  <input type="text" id="brand" placeholder="Enter Brand" required />
+  <input type="number" id="price" placeholder="Enter Price" required />
+  <button type="submit">Add Product</button>
+</form>
+
+<div id="result"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $("#productForm").submit(function (e) {
+    e.preventDefault();
+
+    let product = {
+      title: $("#title").val(),
+      brand: $("#brand").val(),
+      price: parseFloat($("#price").val()),
+    };
+
+    $.ajax({
+      url: "https://dummyjson.com/products/add",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(product),
+      success: function (res) {
+        $("#result").html(`<pre>${JSON.stringify(res, null, 2)}</pre>`);
+        console.log("Product added:", res);
+      },
+      error: function (xhr) {
+        $("#result").html("❌ Failed to add product");
+        console.error("Error:", xhr);
+      },
+    });
+  });
+</script>

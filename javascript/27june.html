@@ -1,0 +1,280 @@
+<!-- innerHTML and textContent -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    color: <input type="text" id="txtColor" name="" id="" />Z
+
+    red:<input
+      type="range"
+      min="0"
+      max="255"
+      value="0"
+      name=""
+      id="red"
+      onchange="funTextColor()"
+    />
+    green:<input
+      type="range"
+      min="0"
+      max="255"
+      value="0"
+      name=""
+      id="green"
+      onchange="funTextColor()"
+    />
+    blue:<input
+      type="range"
+      min="0"
+      max="255"
+      value="0"
+      name=""
+      id="blue"
+      onchange="funTextColor()"
+    />
+    <div id="d1">Hello <b>Bitcode</b></div>
+    <input type="button" value="click" onclick="funClick()" name="" id="" />
+    <script>
+      var div1 = document.getElementById("d1");
+      var txtColor = document.getElementById("txtColor");
+      function funClick() {
+        // d1.innerHTML +="<br> <i>Its JavaScript!!!!!!!!!</i>"; //reads element and text both
+        d1.textContent += "<br> <i>Its JavaScript!!!!!!!!!</i>"; //reads text content only
+
+        // how to change css prperties
+        // use element.style.[css properties in camalcase]
+        d1.style.backgroundColor = "black";
+        d1.style.color = "gray";
+        // how to change properties using user input
+        var colorName = txtColor.value;
+        d1.style.backgroundColor = colorName;
+      }
+      
+      function funTextColor(){
+          var rColor = document.getElementById("red").value;
+          var gColor = document.getElementById("green").value;
+        var bColor = document.getElementById("blue").value;
+        d1.style.backgroundColor = `rgb(${rColor},${gColor},${bColor})`;
+    }
+    </script>
+  </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="txtNum1" placeholder="first no" /><br />
+    <input type="number" id="txtNum2" placeholder="second no" /><br />
+    <input type="button" value="Add" onclick="funAdd()" />
+    <input type="button" value="Substract" onclick="funSub()" /><br />
+    <input type="button" value="Multiply" onclick="funMul()" />
+    <input type="button" value="Divide" onclick="funDiv()" /><br />
+    Addition:<input
+      type="number"
+      id="txtResAdd"
+      placeholder="Addition"
+      readonly
+    />
+    Substraction:<input
+      type="number"
+      id="txtResSub"
+      placeholder="Substraction"
+      readonly
+    />
+    <br />
+    Multiplication:<input
+      type="number"
+      id="txtResMul"
+      placeholder="Multiplication"
+      readonly
+    />
+    Division:<input
+      type="number"
+      id="txtResDiv"
+      placeholder="Division"
+      readonly
+    />
+    <br />
+    <p id="answer"></p>
+    <script>
+      var txtNum1 = document.getElementById("txtNum1");
+      var txtNum2 = document.getElementById("txtNum2");
+      var txtResAdd = document.getElementById("txtResAdd");
+      var txtResSub = document.getElementById("txtResSub");
+      var txtResMul = document.getElementById("txtResMul");
+      var txtResDiv = document.getElementById("txtResDiv");
+      var pAns = document.getElementById("answer");
+
+      function funAdd() {
+        var num1 = parseInt(txtNum1.value);
+        var num2 = parseInt(txtNum2.value);
+        var sum = num1 + num2;
+        txtResAdd.value = sum;
+        pAns.textContent = `Addition of ${num1} and ${num2} is ${sum}`;
+      }
+      function funSub() {
+        var num1 = parseInt(txtNum1.value);
+        var num2 = parseInt(txtNum2.value);
+        var sub = num1 - num2;
+        txtResSub.value = sub;
+        pAns.textContent = `Substraction of ${num1} and ${num2} is ${sub}`;
+      }
+      function funMul() {
+        var num1 = parseInt(txtNum1.value);
+        var num2 = parseInt(txtNum2.value);
+        var mul = num1 * num2;
+        txtResAdd.value = mul;
+        pAns.textContent = `Multiplication of ${num1} and ${num2} is ${mul}`;
+      }
+      function funDiv() {
+        var num1 = parseInt(txtNum1.value);
+        var num2 = parseInt(txtNum2.value);
+        var div = num1 / num2;
+        txtResSub.value = div;
+        pAns.textContent = `Division of ${num1} and ${num2} is ${div}`;
+      }
+
+      console.log(5 >= "3");
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      margin: 8px 0;
+      width: 200px;
+      font-size: 16px;
+    }
+
+    input[type="button"] {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+
+    input[type="button"]:hover {
+      background-color: #0056b3;
+    }
+
+    .result-field {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      width: 300px;
+      background-color: #e9ecef;
+      border: none;
+      font-size: 16px;
+    }
+
+    p#answer {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Simple Calculator</h2>
+
+  <input type="number" id="txtNum1" placeholder="First number" /><br />
+  <input type="number" id="txtNum2" placeholder="Second number" /><br />
+
+  <input type="button" value="Add" onclick="funAdd()" />
+  <input type="button" value="Subtract" onclick="funSub()" />
+  <input type="button" value="Multiply" onclick="funMul()" />
+  <input type="button" value="Divide" onclick="funDiv()" /><br />
+
+  <label>Addition:</label>
+  <input type="number" id="txtResAdd" class="result-field" placeholder="Addition" readonly />
+
+  <label>Subtraction:</label>
+  <input type="number" id="txtResSub" class="result-field" placeholder="Subtraction" readonly />
+
+  <label>Multiplication:</label>
+  <input type="number" id="txtResMul" class="result-field" placeholder="Multiplication" readonly />
+
+  <label>Division:</label>
+  <input type="number" id="txtResDiv" class="result-field" placeholder="Division" readonly />
+
+  <p id="answer"></p>
+
+  <script>
+    var txtNum1 = document.getElementById("txtNum1");
+    var txtNum2 = document.getElementById("txtNum2");
+    var txtResAdd = document.getElementById("txtResAdd");
+    var txtResSub = document.getElementById("txtResSub");
+    var txtResMul = document.getElementById("txtResMul");
+    var txtResDiv = document.getElementById("txtResDiv");
+    var pAns = document.getElementById("answer");
+
+    function funAdd() {
+      var num1 = parseFloat(txtNum1.value);
+      var num2 = parseFloat(txtNum2.value);
+      var sum = num1 + num2;
+      txtResAdd.value = sum;
+      pAns.textContent = `Addition of ${num1} and ${num2} is ${sum}`;
+    }
+
+    function funSub() {
+      var num1 = parseFloat(txtNum1.value);
+      var num2 = parseFloat(txtNum2.value);
+      var sub = num1 - num2;
+      txtResSub.value = sub;
+      pAns.textContent = `Subtraction of ${num1} and ${num2} is ${sub}`;
+    }
+
+    function funMul() {
+      var num1 = parseFloat(txtNum1.value);
+      var num2 = parseFloat(txtNum2.value);
+      var mul = num1 * num2;
+      txtResMul.value = mul;
+      pAns.textContent = `Multiplication of ${num1} and ${num2} is ${mul}`;
+    }
+
+    function funDiv() {
+      var num1 = parseFloat(txtNum1.value);
+      var num2 = parseFloat(txtNum2.value);
+      if (num2 === 0) {
+        pAns.textContent = `Division by zero is not allowed.`;
+        txtResDiv.value = "";
+      } else {
+        var div = num1 / num2;
+        txtResDiv.value = div;
+        pAns.textContent = `Division of ${num1} by ${num2} is ${div}`;
+      }
+    }
+
+    console.log(5 >= "3"); // true, because "3" is coerced to number
+  </script>
+</body>
+</html>

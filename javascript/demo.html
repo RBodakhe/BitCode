@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Phases Demo</title>
+  <style>
+    div {
+      border: 1px solid rgb(196, 99, 99);
+      margin: 20px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="div1">
+    div1
+    <div id="div2">
+      div2
+      <div id="div3">
+        div3
+        <div id="div4">
+          div4 - click here
+          <div id="div5">
+            div5
+            <div id="div6">div6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Convert numeric phase to readable string
+    function getPhaseName(phase) {
+      switch (phase) {
+        case 0: return "NONE";
+        case 1: return "CAPTURING_PHASE";
+        case 2: return "AT_TARGET";
+        case 3: return "BUBBLING_PHASE";
+      }
+    }
+
+    // Add event listeners on all divs
+    for (let i = 1; i <= 6; i++) {
+      let div = document.getElementById(`div${i}`);
+      
+      // Capturing phase listener
+      div.addEventListener("click", function (event) {
+        console.log(`CAPTURE: ${this.id}, Phase: ${event.eventPhase} (${getPhaseName(event.eventPhase)})`);
+      }, true);
+
+      // Bubbling phase listener
+      div.addEventListener("click", function (event) {
+        console.log(`BUBBLE: ${this.id}, Phase: ${event.eventPhase} (${getPhaseName(event.eventPhase)})`);
+      }, false);
+    }
+  </script>
+</body>
+</html>

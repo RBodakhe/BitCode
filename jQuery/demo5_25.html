@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    
+    <!-- <form action="">
+    </form> -->
+    <button id="btn1">click</button>
+    <select id="selTitle">
+      <option value=""></option>
+    </select>
+    <table>
+      <thead>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Img</th>
+      </thead>
+      <tbody id="tbody">
+        <tr>
+          <th colspan="4">no record yet</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      $(document).ready(() => {
+        let categories = null;
+        $("#btn1").click(() => {
+          $.ajax({
+            method: "get",
+            url: "https://dummyjson.com/products/categories",
+            // body:"",//optional
+            success: (data, status) => {
+              categories = data;
+              console.log(categories);
+              console.log(status);
+              let str = "";
+              categories.forEach((category) => {
+                str += `
+                <option value="${category.slug}">${category.name}</option>
+                `;
+              });
+              $("#selTitle").html(str);
+            },
+            // error:()=>{
+
+            // }//callback optional
+          });
+        });
+        $("#selTitle").change(function () {
+          console.log($(this).val());
+          $.get(
+            "https://dummyjson.com/products/category/" + $(this).val(),
+            (data, status) => {
+              let products = data.products;
+              console.log(data.products);
+              let str = "";
+              products.forEach((product) => {
+                str += `
+                    <tr data-bs-target="#mypopup" data-bs-toggle="modal">
+                        <td>${product.id}</td>
+                        <td>${product.title}</td>
+                        <td>${(product.price * 85).toFixed(2)}</td>
+                        <td><img style="width:100px;" src="${
+                          product.thumbnail
+                        }" /></td>
+                        <tr>
+                    `;
+              });
+              $("#tbody").html(str);
+              $("#tbody").click((e) => {
+                console.log(e.target);
+                let tr = e.target.closest("tr");
+                let tds = tr.children;
+                console.log(tds);
+                $("#title").text($(tds[1]).text());
+                $("#mImg").attr("src", $(tds[3]).find("img").attr("src"));
+                $("#price").val($(tds[2]).text());
+                $("#category").text($("#selTitle").val());
+              });
+            }
+          );
+        });
+      });
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
