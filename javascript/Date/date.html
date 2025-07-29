@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>add</button>
+    <input
+      type="text"
+      placeholder="langCode e.g. mr for marathi"
+      id="txtLangCode"
+    />
+    <button>remove</button>
+    <div id="dateBox"></div>
+    <script>
+      let nodeList = [];
+      let dateBox = document.querySelector("#dateBox");
+      document.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (btn.textContent === "remove") {
+            if (dateBox.lastElementChild) {
+              nodeList.push(dateBox.lastElementChild);
+              console.log(dateBox.lastElementChild);
+              dateBox.lastElementChild.remove();
+            }
+          } else {
+            if (nodeList.length > 0) {
+              dateBox.insertBefore(nodeList.pop(), dateBox.firstElementChild);
+            } else {
+              let langCode = document
+                .querySelector("#txtLangCode")
+                .value.trim();
+                document
+                .querySelector("#txtLangCode")
+                .value="";
+              if (langCode && langCode.length == 2) {
+                langDate(langCode);
+              } else {
+                alert("Please Enter Two Char language code");
+              }
+            }
+          }
+        });
+        // console.log(btn);
+      });
+      function langDate(lang) {
+        let div = document.createElement("div");
+        let str = "";
+        let date = new Date();
+        for (let i = 0; i < 7; i++) {
+          str +=
+            "<br>" +
+            date.toLocaleDateString(lang, {
+              weekday: "long",
+              month: "long",
+              year: "numeric",
+              day: "numeric",
+            });
+          date.setDate(date.getDate() + 1);
+        }
+        div.innerHTML += str;
+        dateBox.appendChild(div);
+      }
+      // langDate("mr");
+      // langDate("kn");
+      // langDate("ta");
+
+      // langDate("ur");
+    </script>
+  </body>
+</html>
